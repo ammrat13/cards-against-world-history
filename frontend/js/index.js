@@ -1,10 +1,20 @@
 var joinDrop = false;
 var createDrop = false;
 
-$(document).ready(function(){
-	$("#join-card").hide();
-	$("#create-card").hide();
+function setPin(){
+	window.localStorage.setItem("pin", "126352");
+}
 
+function verifyPin(pin){
+	// Pin is a 6 digit long string
+	return /^\d+$/.test(pin) && pin.length === 6;
+}
+
+function go(){
+	window.location.href = "game.html";
+}
+
+$(document).ready(function(){
 	$("#join-btn").click(function(){
 		if(!joinDrop){
 			joinDrop = true;
@@ -28,4 +38,20 @@ $(document).ready(function(){
 			$("#create-card").slideUp();
 		}
 	});
-})
+
+	$("#join-go").click(function(){
+		if(verifyPin($("#join-pin").val())){
+			window.localStorage.setItem("pin", $("#join-pin").val());
+			go();
+		} else {
+			$("#join-pin").addClass("is-invalid");
+		}
+	});
+
+	$("#create-go").click(function(){
+		go();
+	});
+
+	setPin();
+	$("#create-pin").html(window.localStorage.getItem("pin"));
+});
