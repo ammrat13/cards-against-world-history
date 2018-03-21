@@ -17,3 +17,7 @@ body{
 .breaker{
 	height: 30px;
 }
+
+.breaker-sm{
+	height: 10px;
+}
