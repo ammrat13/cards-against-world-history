@@ -1,6 +1,7 @@
 var WHRatio = .85
 
 var pin = window.localStorage.getItem("pin");
+var pin = window.localStorage.getItem("pid");
 var dealtCards = [];
 var fieldCards = [];
 var handCards = [];
