@@ -57,6 +57,6 @@ $(document).ready(function(){
 		}
 	});
 
-	retrPin();
+	retrPinAndPid();
 	$("#create-pin").html(window.localStorage.getItem("pin"));
 });

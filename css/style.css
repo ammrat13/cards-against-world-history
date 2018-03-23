@@ -15,6 +15,10 @@ body{
     color: black;
 }
 
+.card-carousel{
+	height: 60vh;
+}
+
 .game-card{
 	height: 60vh;
 	width: 40vh;
