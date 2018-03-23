@@ -1,6 +1,7 @@
 body{
 	margin-left: 30px;
 	margin-right: 30px;
+	margin-bottom: 30px;
 }
 
 .card{
@@ -8,6 +9,17 @@ body{
 	padding-bottom: 30px;
 	padding-left: 30px;
 	padding-right: 30px;
+}
+
+.slick-prev:before, .slick-next:before{
+    color: black;
+}
+
+.game-card{
+	height: 60vh;
+	width: 40vh;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .initially-hidden{

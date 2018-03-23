@@ -49,7 +49,9 @@ $(document).ready(function(){
 	});
 
 	$("#create-go").click(function(){
-		go();
+		if(verifyPin($("#create-pin").html())){
+			go();
+		}
 	});
 
 	setPin();
