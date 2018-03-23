@@ -2,13 +2,14 @@ var WHRatio = .85
 
 var pin = window.localStorage.getItem("pin");
 
-var dealtCards = [];
-var fieldCards = [];
-var handCards = [];
+var dealtCards = ["Lorem", "Ipsum", "Dolor"];
+var fieldCards = ["Field", "Macjwqks", "dsda"];
+var handCards = ["asd"];
+var cardCzar = true;
 
 var slickInited = false;
 
-function slickInit(){
+function slickReload(){
 	// Unslick if we have slicked already
 	if(slickInited){
 		$(".card-carousel").each(function(){
@@ -51,17 +52,47 @@ function slickInit(){
 
 // Update the cards displayed to the cards in the list
 function refreshCards(){
-	$("#dealt-card-carousel").slick('removeSlide', null, null, true)
+	// Remove all cards
+	$("#dealt-card-carousel").slick("removeSlide", null, null, true);
+	$("#field-card-carousel").slick("removeSlide", null, null, true);
+	$("#hand-card-carousel").slick("removeSlide", null, null, true);
+
+	for(var i=0; i<dealtCards.length; i++){
+		$("#dealt-card-carousel").slick("slickAdd", '<div class="game-card card bg-dark text-white"><h5><b>' + dealtCards[i] + '</b></h5></div>');
+	}
+
+	for(var i=0; i<fieldCards.length; i++){
+		$("#field-card-carousel").slick("slickAdd", '<div class="game-card card bg-light text-dark"><h5><b>' + fieldCards[i] + '</b></h5></div>');
+	}
+
+	for(var i=0; i<handCards.length; i++){
+		$("#hand-card-carousel").slick("slickAdd", '<div class="game-card card bg-light text-dark"><h5><b>' + handCards[i] + '</b></h5></div>');
+	}
+}
+
+// Called every so often
+function update(){
+	// UI updates
+	if(cardCzar){
+		$("#card-czar-alert").slideDown();
+	} else {
+		$("#card-czar-alert").slideUp();
+	}
+	refreshCards();
 }
 
 $(document).ready(function(){
-	if(pin === null){
+	if(window.localStorage.getItem("pin") === null || window.localStorage.getItem("pin") === ""){
 		window.location.href = "index.html";
 	}
 
-	slickInit();
+	slickReload();
+	refreshCards();
 
+	// Slick needs this to work with tabs
 	$('a[data-toggle=tab]').on("shown.bs.tab", function(e){
-		slickInit();
+		slickReload();
 	});
+
+	setInterval(update, 5000);
 });

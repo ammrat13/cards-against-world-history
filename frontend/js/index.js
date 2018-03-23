@@ -1,13 +1,15 @@
 var joinDrop = false;
 var createDrop = false;
 
-function setPin(){
-	window.localStorage.setItem("pin", "126352");
-}
-
 function verifyPin(pin){
 	// Pin is a 6 digit long string
 	return /^\d+$/.test(pin) && pin.length === 6;
+}
+
+function retrPinAndPid(){
+	// We only need to check for pin as if it is present, pid is present
+	window.localStorage.setItem("pin", "126352");
+	window.localStorage.setItem("pid", "0");
 }
 
 function go(){
@@ -50,10 +52,11 @@ $(document).ready(function(){
 
 	$("#create-go").click(function(){
 		if(verifyPin($("#create-pin").html())){
+			window.localStorage.setItem("pin", $("#create-pin").html());
 			go();
 		}
 	});
 
-	setPin();
+	retrPin();
 	$("#create-pin").html(window.localStorage.getItem("pin"));
 });
