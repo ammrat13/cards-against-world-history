@@ -6,9 +6,15 @@ function verifyPin(pin){
 	return /^\d+$/.test(pin) && pin.length === 6;
 }
 
-function retrPinAndPid(){
+function createPinAndPid(){
 	// We only need to check for pin as if it is present, pid is present
 	window.localStorage.setItem("pin", "126352");
+	window.localStorage.setItem("pid", "0");
+}
+
+function joinPinAndPid(pin){
+	// We only need to check for pin as if it is present, pid is present
+	window.localStorage.setItem("pin", pin);
 	window.localStorage.setItem("pid", "0");
 }
 
@@ -43,20 +49,20 @@ $(document).ready(function(){
 
 	$("#join-go").click(function(){
 		if(verifyPin($("#join-pin").val())){
-			window.localStorage.setItem("pin", $("#join-pin").val());
+			joinPinAndPid();
 			go();
 		} else {
 			$("#join-pin").addClass("is-invalid");
 		}
 	});
 
+	$("#create-pin").on("DOMSubtreeModified", function(){
+		$("#create-go").removeClass("disabled");
+	});
 	$("#create-go").click(function(){
-		if(verifyPin($("#create-pin").html())){
-			window.localStorage.setItem("pin", $("#create-pin").html());
-			go();
-		}
+		go();
 	});
 
-	retrPinAndPid();
+	createPinAndPid();
 	$("#create-pin").html(window.localStorage.getItem("pin"));
 });
