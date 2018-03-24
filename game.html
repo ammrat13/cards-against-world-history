@@ -7,6 +7,7 @@
 
 		<!-- JQuery -->
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 		<!-- Popper.js -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<!-- Bootstrap -->
@@ -31,11 +32,8 @@
 				document.write(window.localStorage.getItem("pin"));
 			</script></h3></center>
 		</div>
-		<div class="breaker"></div>
+		<div class="breaker-sm"></div>
 		<div class="container">
-			<div id="card-czar-alert" class="alert alert-info text-center initially-hidden" role="alert">
-				<b>You are the Card Czar</b>
-			</div>
 			<div id="tabs" class="nav nav-tabs nav-justified" role="tablist">
 				<a id="dealt-tab" href="#dealt" class="nav-item nav-link active" data-toggle="tab" role="tab" aria-controls="dealt" aria-selected="true">Dealt</a>
 				<a id="field-tab" href="#field" class="nav-item nav-link" data-toggle="tab" role="tab" aria-controls="field" aria-selected="false">Field</a>
@@ -65,6 +63,19 @@
 					</div>
 					<div class="breaker"></div>
 					<button id="hand-go" class="btn btn-success btn-lg btn-block disabled" type="button">Go</button>
+				</div>
+			</div>
+			<div class="breaker-md"></div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div id="score-disp" class="alert alert-info text-center" role="alert">
+						<b>Score: <span id="score">0</span></b>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div id="card-czar-alert" class="alert alert-success text-center initially-hidden" role="alert">
+						<b>You are the Card Czar</b>
+					</div>
 				</div>
 			</div>
 		</div>

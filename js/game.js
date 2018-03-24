@@ -5,6 +5,7 @@ var pin = window.localStorage.getItem("pid");
 var dealtCards = [];
 var fieldCards = [];
 var handCards = [];
+var score = 0;
 var cardCzar = false;
 
 var slickInited = false;
@@ -68,6 +69,8 @@ function removeDealt(s){
 		}
 		// Remove from array
 		dealtCards.splice(i,1);
+		// So we don't skip
+		i--;
 	}
 }
 
@@ -85,6 +88,8 @@ function removeField(s){
 		}
 		// Remove from array
 		fieldCards.splice(i,1);
+		// So we don't skip
+		i--;
 	}
 }
 
@@ -102,6 +107,8 @@ function removeHand(s){
 		}
 		// Remove from array
 		handCards.splice(i,1);
+		// So we don't skip
+		i--;
 	}
 }
 
@@ -110,14 +117,15 @@ function update(){
 	// TODO: Networking
 	// UI updates
 	if(cardCzar){
-		$("#card-czar-alert").slideDown();
+		$("#card-czar-alert").effect("slide", {direction: "right", mode: "show"}, 500);
 		$("#field-go").removeClass("disabled");
 		$("#hand-go").addClass("disabled");
 	} else {
-		$("#card-czar-alert").slideUp();
+		$("#card-czar-alert").effect("slide", {direction: "right", mode: "hide"}, 500);
 		$("#field-go").addClass("disabled");
 		$("#hand-go").removeClass("disabled");
 	}
+	$("#score").html(score.toString());
 }
 
 $(document).ready(function(){
@@ -141,5 +149,6 @@ $(document).ready(function(){
 		
 	});
 
-	setInterval(update, 5000);
+	update();
+	setInterval(update, 2000);
 });

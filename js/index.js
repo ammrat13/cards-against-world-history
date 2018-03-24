@@ -1,25 +1,33 @@
 var joinDrop = false;
 var createDrop = false;
 
+function go(){
+	window.location.href = "game.html";
+}
+
 function verifyPin(pin){
 	// Pin is a 6 digit long string
 	return /^\d+$/.test(pin) && pin.length === 6;
 }
 
-function createPinAndPid(){
+function createPinAndPid(g){
 	// We only need to check for pin as if it is present, pid is present
 	window.localStorage.setItem("pin", "126352");
 	window.localStorage.setItem("pid", "0");
+	
+	if(g){
+		go();
+	}
 }
 
-function joinPinAndPid(pin){
+function joinPinAndPid(pin, g){
 	// We only need to check for pin as if it is present, pid is present
 	window.localStorage.setItem("pin", pin);
 	window.localStorage.setItem("pid", "0");
-}
 
-function go(){
-	window.location.href = "game.html";
+	if(g){
+		go();
+	}
 }
 
 $(document).ready(function(){
@@ -49,20 +57,22 @@ $(document).ready(function(){
 
 	$("#join-go").click(function(){
 		if(verifyPin($("#join-pin").val())){
-			joinPinAndPid();
-			go();
+			$("#join-go").html("Loading...");
+			$("#join-go").addClass("disabled");
+			joinPinAndPid($("#join-pin").val(), true);
 		} else {
 			$("#join-pin").addClass("is-invalid");
 		}
 	});
 
 	$("#create-pin").on("DOMSubtreeModified", function(){
+		$("#create-go").html("Go");
 		$("#create-go").removeClass("disabled");
 	});
 	$("#create-go").click(function(){
 		go();
 	});
 
-	createPinAndPid();
+	createPinAndPid(false);
 	$("#create-pin").html(window.localStorage.getItem("pin"));
 });

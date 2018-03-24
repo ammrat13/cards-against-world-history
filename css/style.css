@@ -38,6 +38,10 @@ body{
 	height: 30px;
 }
 
+.breaker-md{
+	height: 20px;
+}
+
 .breaker-sm{
 	height: 10px;
 }
