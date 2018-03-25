@@ -22,34 +22,35 @@ function slickReload(){
 		$(this).slick({
 			slidesToShow: 3,
 			arrows: true,
-			infinite: false,
+			infinite: true,
 			responsive: [
 				{
 					breakpoint: 1024,
 					settings: {
 						arrows: true,
 						slidesToShow: 3,
-						infinite: false
+						infinite: true,
 					}
 				},
 				{
-					breakpoint: 768,
-					settings: {
-						arrows: true,
-						slidesToShow: 2,
-						infinite: false
-					}
-				},
-				{
-					breakpoint: 480,
+					breakpoint: 540,
 					settings: {
 						arrows: true,
 						slidesToShow: 1,
-						infinite: false
+						infinite: true,
 					}
-				}	
+				}
 			]
 		});
+	});
+
+	$("#hand-card-carousel").on("beforeChange", function(event, slick, currentSlide, nextSlide){
+		$(".slick-slide").removeClass("bg-light");
+		$(".slick-slide").addClass("bg-secondary");
+	}).on("afterChange", function(event, slick, currentSlide, nextSlide){
+		$(".slick-current").addClass("bg-light");
+	}).on("init", function(event, slick){
+		$(".slick-current").addClass("bg-light");
 	});
 }
 
@@ -74,7 +75,7 @@ function removeDealt(s){
 
 function addField(s){
 	$("#field-card-carousel").slick("slickAdd",
-		'<div class="game-card card bg-light text-dark"><h5><b>' + s + '</b></h5>'
+		'<div class="game-card card bg-secondary text-dark"><h5><b>' + s + '</b></h5>'
 	);
 	fieldCards.push(s);
 }
@@ -93,7 +94,7 @@ function removeField(s){
 
 function addHand(s){
 	$("#hand-card-carousel").slick("slickAdd",
-		'<div class="game-card card bg-light text-dark"><h5><b>' + s + '</b></h5>'
+		'<div class="game-card card bg-secondary text-dark"><h5><b>' + s + '</b></h5>'
 	);
 	handCards.push(s);
 }
@@ -217,7 +218,6 @@ $(document).ready(function(){
 		slickReload();
 	});
 
-	// TODO: Implement handlers with networking
 	$("#field-go").click(function(){
 		if(fieldCards[$("#field-card-carousel").slick("slickCurrentSlide")] !== undefined){
 			var current = fieldCards[$("#field-card-carousel").slick("slickCurrentSlide")];
