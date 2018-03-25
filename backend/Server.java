@@ -30,7 +30,7 @@ public class Server {
 			// Do this as long as the program is running
 			while(true){
 				Socket conn = serv.accept();
-				connCount = (connCount + 1) % 1000000;
+				connCount = (connCount + 1) % Integer.MAX_VALUE;
 
 				System.out.println("Connected to " + conn.getRemoteSocketAddress());
 				System.out.println("Connection ID: " + connCount);
@@ -96,7 +96,7 @@ public class Server {
 
 			// Create a game
 			if(req.page.equals("/create_game.html")){
-				String pin = String.format("%06d", connID);
+				String pin = String.format("%010d", connID);
 				games.put(pin, new Game());
 				out.print(pin);
 			}
@@ -105,7 +105,10 @@ public class Server {
 			if(req.page.equals("/join_game.html")){
 				if(games.get(req.params.get("pin")) != null){
 					String pid = games.get(req.params.get("pin")).join();
-					out.print(pid);
+					if(pid != null)
+						out.print(pid);
+					else
+						out.print("INVALID");
 				} else {
 					out.print("INVALID");
 				}

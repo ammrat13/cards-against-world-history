@@ -47,16 +47,20 @@ public class Game {
 	}
 
 	public String join(){
-		playerScores.add(0);
-		playerHands.add(new ArrayList<String>());
-		pids.add(Integer.toString(playerScores.size()-1));
-		deal();
+		if(playerScores.size()*10 + 10 <= WDECK.size()){
+			playerScores.add(0);
+			playerHands.add(new ArrayList<String>());
+			pids.add(Integer.toString(playerScores.size()-1));
+			deal();
 
-		if(cardCzar == -1)
-			cardCzar = 0;
+			if(cardCzar == -1)
+				cardCzar = 0;
 
-		// Return player id
-		return Integer.toString(playerScores.size()-1);
+			// Return player id
+			return Integer.toString(playerScores.size()-1);
+		} else {
+			return null;
+		}
 	}
 
 	public void leave(String p){

@@ -7,7 +7,7 @@ function go(){
 
 function verifyPin(pin){
 	// Pin is a 6 digit long string
-	return /^\d+$/.test(pin) && pin.length === 6;
+	return /^\d+$/.test(pin) && pin.length === 10;
 }
 
 function createPinAndPid(g){
