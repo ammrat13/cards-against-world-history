@@ -112,10 +112,11 @@ public class Game {
 			if(ce.getValue().equals(card)){
 				String p = ce.getKey();
 				playerScores.set(pids.indexOf(p), playerScores.get(pids.indexOf(p))+1);
-				field.clear();
 				break;
 			}
 		}
+
+		field.clear();
 
 		setCardCzar();
 		deal();
