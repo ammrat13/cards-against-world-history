@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import javax.imageio.*;
 
 public class Server {
 
@@ -14,6 +15,10 @@ public class Server {
 		"/js/index.js",
 		"/js/game.js",
 		"/css/style.css"
+	};
+	// The array of all the image files
+	public final static String[] imageFiles = {
+		"/favicon.png"
 	};
 
 	// How many connections we have had
@@ -86,6 +91,17 @@ public class Server {
 						while(file.hasNextLine())
 							ret += file.nextLine() + "\n";
 						out.println(ret);
+					} catch (IOException e){
+						e.printStackTrace();
+					}
+				}
+			}
+
+			// Check if it is an image file being requested
+			for(String s : imageFiles){
+				if(s.equals(req.page)){
+					try {
+						ImageIO.write(ImageIO.read(new File(FRONTENDPATH + s)), "PNG", conn.getOutputStream());
 					} catch (IOException e){
 						e.printStackTrace();
 					}
