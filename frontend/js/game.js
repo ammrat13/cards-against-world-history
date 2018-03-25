@@ -23,25 +23,7 @@ function slickReload(){
 		$(this).slick({
 			slidesToShow: 1,
 			arrows: true,
-			infinite: true,
-			responsive: [
-				{
-					breakpoint: 1024,
-					settings: {
-						arrows: true,
-						slidesToShow: 1,
-						infinite: true,
-					}
-				},
-				{
-					breakpoint: 540,
-					settings: {
-						arrows: false,
-						slidesToShow: 1,
-						infinite: true,
-					}
-				}
-			]
+			infinite: true
 		});
 	});
 
