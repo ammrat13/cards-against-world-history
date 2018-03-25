@@ -25,7 +25,7 @@ public class Request {
 		if(!params.isEmpty()){
 			ret += "\nParameters: \n";
 			for(String k : params.keySet())
-				ret += k + " = " + params.get(k) + "\n";
+				System.out.println(k + "=" + params.get(k));
 		}
 		return ret;
 	}
