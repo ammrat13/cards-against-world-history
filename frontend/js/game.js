@@ -133,6 +133,14 @@ $(document).ready(function(){
 		window.location.href = "index.html";
 	}
 
+	// Handle everything if the user goes away
+	$(window).on("beforeunload", function(){
+		// Clear pin and pid
+		window.localStorage.removeItem("pin");
+		window.localStorage.removeItem("pid");
+		// TODO: Networking
+	});
+
 	slickReload();
 
 	// Slick needs this to work with tabs
@@ -140,7 +148,7 @@ $(document).ready(function(){
 		slickReload();
 	});
 
-	// TODO: Implement handlers
+	// TODO: Implement handlers with networking
 	$("#field-go").click(function(){
 
 	});
