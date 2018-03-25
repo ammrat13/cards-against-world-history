@@ -125,7 +125,6 @@ public class Game {
 	public void deal(){
 		// Deal hands
 		for(ArrayList<String> hand : playerHands){
-			hand.clear();
 			Collections.shuffle(WDECK);
 			int i = 0;
 			while(hand.size() < 10 && i < WDECK.size()){

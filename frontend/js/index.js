@@ -40,6 +40,7 @@ function joinPinAndPid(pin, g){
 		} else {
 			$("#join-go").html("Go");
 			$("#join-go").removeClass("disabled");
+			$("#join-go").prop("disabled", false);
 			$("#join-pin").prop("disabled", false);
 			$("#join-pin").addClass("is-invalid");
 		}
@@ -75,6 +76,7 @@ $(document).ready(function(){
 		if(verifyPin($("#join-pin").val())){
 			$("#join-go").html("Loading...");
 			$("#join-go").addClass("disabled");
+			$("#join-go").prop("disabled", true);
 			$("#join-pin").prop("disabled", true);
 			joinPinAndPid($("#join-pin").val(), true);
 		} else {
@@ -90,6 +92,7 @@ $(document).ready(function(){
 
 	$("#create-pin").on("DOMSubtreeModified", function(){
 		$("#create-go").removeClass("disabled");
+		$("#create-go").prop("disabled", false);
 	});
 	$("#create-go").click(function(){
 		go();

@@ -2,6 +2,7 @@ var WHRatio = .85
 
 var pin = window.localStorage.getItem("pin");
 var pid = window.localStorage.getItem("pid");
+var oldDealt = [];
 var dealtCards = [];
 var fieldCards = [];
 var handCards = [];
@@ -20,7 +21,7 @@ function slickReload(){
 
 	$(".card-carousel").each(function(){
 		$(this).slick({
-			slidesToShow: 3,
+			slidesToShow: 1,
 			arrows: true,
 			infinite: true,
 			responsive: [
@@ -28,14 +29,14 @@ function slickReload(){
 					breakpoint: 1024,
 					settings: {
 						arrows: true,
-						slidesToShow: 3,
+						slidesToShow: 1,
 						infinite: true,
 					}
 				},
 				{
 					breakpoint: 540,
 					settings: {
-						arrows: true,
+						arrows: false,
 						slidesToShow: 1,
 						infinite: true,
 					}
@@ -52,6 +53,19 @@ function slickReload(){
 	}).on("init", function(event, slick){
 		$(".slick-current").addClass("bg-light");
 	});
+
+	$("#field-card-carousel").on("beforeChange", function(event, slick, currentSlide, nextSlide){
+		$(".slick-slide").removeClass("bg-light");
+		$(".slick-slide").addClass("bg-secondary");
+	}).on("afterChange", function(event, slick, currentSlide, nextSlide){
+		$(".slick-current").addClass("bg-light");
+	}).on("init", function(event, slick){
+		$(".slick-current").addClass("bg-light");
+	});
+
+	$(".slick-slide").removeClass("bg-light");
+	$(".slick-slide").addClass("bg-secondary");
+	$(".slick-current").addClass("bg-light");
 }
 
 function addDealt(s){
@@ -75,7 +89,7 @@ function removeDealt(s){
 
 function addField(s){
 	$("#field-card-carousel").slick("slickAdd",
-		'<div class="game-card card bg-secondary text-dark"><h5><b>' + s + '</b></h5>'
+		'<div class="game-card card bg-secondary"><h5><b>' + s + '</b></h5>'
 	);
 	fieldCards.push(s);
 }
@@ -94,7 +108,7 @@ function removeField(s){
 
 function addHand(s){
 	$("#hand-card-carousel").slick("slickAdd",
-		'<div class="game-card card bg-secondary text-dark"><h5><b>' + s + '</b></h5>'
+		'<div class="game-card card bg-secondary"><h5><b>' + s + '</b></h5>'
 	);
 	handCards.push(s);
 }
@@ -113,24 +127,6 @@ function removeHand(s){
 
 // Called every so often
 function update(){
-	$.get("/is_card_czar.html?pin=" + pin + "&pid=" + pid, function(data){
-		if(data === "true"){
-			$("#card-czar-alert").effect("slide", {direction: "right", mode: "show"}, 500);
-			$("#field-go").removeClass("disabled");
-			$("#hand-go").addClass("disabled");
-		} else if(data === "false"){
-			$("#card-czar-alert").effect("slide", {direction: "right", mode: "hide"}, 500);
-			$("#field-go").addClass("disabled");
-			$("#hand-go").removeClass("disabled");
-		}
-	});
-
-	$.get("/get_score.html?pin=" + pin + "&pid=" + pid, function(data){
-		if(data !== "INVALID"){
-			$("#score").html(data);
-		}
-	});
-
 	$.get("/get_dealt.html?pin=" + pin, function(data){
 		if(data.trim() !== "INVALID"){
 			var ds = data.split("\n");
@@ -196,6 +192,35 @@ function update(){
 			}
 		}
 	});
+
+	$.get("/is_card_czar.html?pin=" + pin + "&pid=" + pid, function(data){
+		if(data === "true"){
+			$("#card-czar-alert").effect("slide", {direction: "right", mode: "show"}, 500);
+			$("#field-go").removeClass("disabled");
+			$("#field-go").prop("disabled", false);
+			$("#hand-go").addClass("disabled");
+			$("#hand-go").prop("disabled", true);
+		} else if(data === "false"){
+			$("#card-czar-alert").effect("slide", {direction: "right", mode: "hide"}, 500);
+			$("#field-go").addClass("disabled");
+			$("#field-go").prop("disabled", true);
+			if(dealtCards !== oldDealt){
+				oldDealt = dealtCards
+				$("#hand-go").removeClass("disabled");
+				$("#hand-go").prop("disabled", false);
+			}
+		}
+	});
+
+	$.get("/get_score.html?pin=" + pin + "&pid=" + pid, function(data){
+		if(data !== "INVALID"){
+			$("#score").html(data);
+		}
+	});
+
+	$(".slick-slide").removeClass("bg-light");
+	$(".slick-slide").addClass("bg-secondary");
+	$(".slick-current").addClass("bg-light");
 }
 
 $(document).ready(function(){
@@ -225,6 +250,11 @@ $(document).ready(function(){
 				removeField(fieldCards[i]);
 				i--
 			}
+			
+			$(".slick-slide").removeClass("bg-light");
+			$(".slick-slide").addClass("bg-secondary");
+			$(".slick-current").addClass("bg-light");
+			
 			$.get(encodeURI("/select_card.html?pin=" + pin + "&card=" + current), function(data){});
 		}
 	});
@@ -234,6 +264,13 @@ $(document).ready(function(){
 			var current = handCards[$("#hand-card-carousel").slick("slickCurrentSlide")];
 			addField(current);
 			removeHand(current);
+			$("#hand-go").addClass("disabled");
+			$("#hand-go").prop("disabled", true);
+			
+			$(".slick-slide").removeClass("bg-light");
+			$(".slick-slide").addClass("bg-secondary");
+			$(".slick-current").addClass("bg-light");
+			
 			$.get(encodeURI("/play_card.html?pin=" + pin + "&pid=" + pid + "&card=" + current), function(data){});
 		}
 	});
