@@ -73,6 +73,7 @@ $(document).ready(function(){
 	});
 
 	$("#join-go").click(function(){
+		alert("Clicked");
 		if(verifyPin($("#join-pin").val())){
 			$("#join-go").html("Loading...");
 			$("#join-go").addClass("disabled");
