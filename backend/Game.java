@@ -29,7 +29,7 @@ public class Game {
 		// Initialize white deck
 		WDECK = new ArrayList<String>();
 		try {
-			Scanner wDeckIn = new Scanner(new File("bdeck.txt"));
+			Scanner wDeckIn = new Scanner(new File("wdeck.txt"));
 			while(wDeckIn.hasNextLine())
 				WDECK.add(wDeckIn.nextLine());
 		} catch (IOException e){
