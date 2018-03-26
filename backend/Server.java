@@ -5,6 +5,9 @@ import javax.imageio.*;
 
 public class Server {
 
+	// The port we will listen on (<1024 requires root)
+	public final static int PORT = 80;
+
 	// The path to all the frontend files
 	public final static String FRONTENDPATH = "../frontend";
 
@@ -20,6 +23,19 @@ public class Server {
 	public final static String[] imageFiles = {
 		"/favicon.png"
 	};
+	// The array of all special files
+	public final static String[] specFiles = {
+		"/create_game.html",
+		"/join_game.html",
+		"/leave_game.html",
+		"/get_dealt.html",
+		"/get_field.html",
+		"/get_hand.html",
+		"/play_card.html",
+		"/select_card.html",
+		"/is_card_czar.html",
+		"/get_score.html"
+	};
 
 	// How many connections we have had
 	public static int connCount = 0;
@@ -29,8 +45,7 @@ public class Server {
 
 	public static void main(String[] args){
 		try {
-			// Listen on port 80 for HTTP connections (requires root)
-			ServerSocket serv = new ServerSocket(80);
+			ServerSocket serv = new ServerSocket(PORT);
 
 			// Do this as long as the program is running
 			while(true){
@@ -82,6 +97,37 @@ public class Server {
 		}
 
 		public void handleRequest(Request req){
+
+			// Headers
+			if(	Arrays.asList(files).contains(req.page)
+			||	Arrays.asList(imageFiles).contains(req.page)
+			||	Arrays.asList(specFiles).contains(req.page)){
+				out.println("HTTP/1.1 200 OK");
+				out.println("Connection: close");
+				out.println("Cache-Control: no-cache");
+
+				// MIME Type
+				if(Arrays.asList(files).contains(req.page)){
+					if(req.page.endsWith(".html"))
+						out.println("Content-Type: text/html");
+					if(req.page.endsWith(".css"))
+						out.println("Content-Type: text/css");
+					if(req.page.endsWith(".js"))
+						out.println("Content-Type: text/javascript");
+				} else if(Arrays.asList(imageFiles).contains(req.page)){
+					out.println("Content-Type: image/png");
+				} else if(Arrays.asList(specFiles).contains(req.page)){
+					out.println("Content-Type: text/plain");
+				}
+				out.println();
+			} else {
+				out.println("HTTP/1.1 404 Not Found");
+				out.println();
+				return;
+			}
+			// So that images work properly
+			out.flush();
+
 			// Check if it is a file being requested
 			for(String s : files){
 				if(s.equals(req.page)){

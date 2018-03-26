@@ -23,9 +23,9 @@ public class Request {
 		String ret = "";
 		ret += "Page: " + page;
 		if(!params.isEmpty()){
-			ret += "\nParameters: \n";
+			ret += "\nParameters: ";
 			for(String k : params.keySet())
-				ret += k + "=" + params.get(k) + " & ";
+				ret += k + "=" + params.get(k) + "; ";
 		}
 		return ret;
 	}
