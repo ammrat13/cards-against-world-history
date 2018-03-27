@@ -26,28 +26,6 @@ function slickReload(){
 			infinite: true
 		});
 	});
-
-	$("#hand-card-carousel").on("beforeChange", function(event, slick, currentSlide, nextSlide){
-		$(".slick-slide").removeClass("bg-light");
-		$(".slick-slide").addClass("bg-secondary");
-	}).on("afterChange", function(event, slick, currentSlide, nextSlide){
-		$(".slick-current").addClass("bg-light");
-	}).on("init", function(event, slick){
-		$(".slick-current").addClass("bg-light");
-	});
-
-	$("#field-card-carousel").on("beforeChange", function(event, slick, currentSlide, nextSlide){
-		$(".slick-slide").removeClass("bg-light");
-		$(".slick-slide").addClass("bg-secondary");
-	}).on("afterChange", function(event, slick, currentSlide, nextSlide){
-		$(".slick-current").addClass("bg-light");
-	}).on("init", function(event, slick){
-		$(".slick-current").addClass("bg-light");
-	});
-
-	$(".slick-slide").removeClass("bg-light");
-	$(".slick-slide").addClass("bg-secondary");
-	$(".slick-current").addClass("bg-light");
 }
 
 function addDealt(s){
@@ -71,7 +49,7 @@ function removeDealt(s){
 
 function addField(s){
 	$("#field-card-carousel").slick("slickAdd",
-		'<div class="game-card card bg-secondary"><h5><b>' + s + '</b></h5>'
+		'<div class="game-card card bg-light"><h5><b>' + s + '</b></h5>'
 	);
 	fieldCards.push(s);
 }
@@ -90,7 +68,7 @@ function removeField(s){
 
 function addHand(s){
 	$("#hand-card-carousel").slick("slickAdd",
-		'<div class="game-card card bg-secondary"><h5><b>' + s + '</b></h5>'
+		'<div class="game-card card bg-light"><h5><b>' + s + '</b></h5>'
 	);
 	handCards.push(s);
 }
@@ -199,10 +177,6 @@ function update(){
 			$("#score").html(data);
 		}
 	});
-
-	$(".slick-slide").removeClass("bg-light");
-	$(".slick-slide").addClass("bg-secondary");
-	$(".slick-current").addClass("bg-light");
 }
 
 $(document).ready(function(){
@@ -233,10 +207,6 @@ $(document).ready(function(){
 				i--
 			}
 			
-			$(".slick-slide").removeClass("bg-light");
-			$(".slick-slide").addClass("bg-secondary");
-			$(".slick-current").addClass("bg-light");
-			
 			$.get(encodeURI("/select_card.html?pin=" + pin + "&card=" + current), function(data){});
 		}
 	});
@@ -248,10 +218,6 @@ $(document).ready(function(){
 			removeHand(current);
 			$("#hand-go").addClass("disabled");
 			$("#hand-go").prop("disabled", true);
-			
-			$(".slick-slide").removeClass("bg-light");
-			$(".slick-slide").addClass("bg-secondary");
-			$(".slick-current").addClass("bg-light");
 			
 			$.get(encodeURI("/play_card.html?pin=" + pin + "&pid=" + pid + "&card=" + current), function(data){});
 		}
