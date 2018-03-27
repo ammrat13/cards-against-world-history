@@ -206,6 +206,9 @@ $(document).ready(function(){
 				removeField(fieldCards[i]);
 				i--
 			}
+
+			$("#field-go").addClass("disabled");
+			$("#field-go").prop("disabled", true);
 			
 			$.get(encodeURI("/select_card.html?pin=" + pin + "&card=" + current), function(data){});
 		}
