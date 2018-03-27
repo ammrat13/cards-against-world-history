@@ -94,8 +94,10 @@ public class Game {
 	}
 
 	public void setCardCzar(){
-		// Set it to a random player
-		cardCzar = (int) (Math.random()*playerScores.size());
+		// Set it to a random player without replacement
+		int cardCzarOld = cardCzar;
+		while(cardCzarOld == cardCzar)
+			cardCzar = (int) (Math.random()*playerScores.size());
 	}
 
 	public void play(String p, String card){
