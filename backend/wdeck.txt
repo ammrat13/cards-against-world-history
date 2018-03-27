@@ -1,100 +1,459 @@
-1. Why is it that every time disaster strikes, I find myself without a proper blade?
-2. Some cereals give me gas..
-3. Dancing on the table may be my favorite past time
-4. I really like banannas
-5. I have super powers
-6. I like to be naked
-7. I AM MAN! (WOMAN)
-8. I am the king (queen) of cheese!
-9. My hair hurts
-10. It's those damn aliens
-11. It's official.. I'm in love with HOT DOGS!
-12. Polar bears sleep with penguins, everyone knows that
-13. Why would I study if I can pretend to study?
-14. Community College is easier than sleeping with a prostitute
-15. IT'S A CHALLENGE!
-16. I fear chipmunks..period
-17. Fupas are almost as sexy as your mom
-18. How dare you tempt me with those bolgarious schemes
-19. I was born at a very young age.
-20. I lost my necklace and dignity in the river.
-21. Are you afraid of raccoons?
-22. Ask me about allergy relief
-23. I want to punch bees in the face
-24. Why are you calling me while im pretending to be busy!
-25. Yay! I'm taking a poop!
-26.well hello there dingleberry
-27. Hey, what happens in vegas stays in vegas!
-28. Yes, I would love to sled down your stairs
-29. Let's run through the sprinklers!
-30.  Hemroids are a pain in the butt..
-31. genital herpes can be a hassle
-32. RUMSPRINGA!
-33. I hate when I have gum stuck in my hair
-34. Stand away, you smell like boiled cabbage
-35. Adventure time!
-36. Quick find the source of the lights!
-37. How dare you question my authority?
-38. Chitty Chitty bang bang!
-39. I'll go to the movies with you if you wait outside.
-40. Stand back, your hair makes me nervous
-41. I have never had this much fun since my last flash dance festival
-42. Your dog needs to stop licking my feet
-43. My name is (your name), but you can call me tomorrow
-44. If you eat too much cheese it can clog up your butt, be careful
-45. If barbie is so popular, why do you have to buy her friends?
-46. Running in place gets you nowhere, fast!
-47. If you dance with me I promise to step on your feet.
-48. Do you know what our state bird is?
-49. Do you know what our state tree is?
-50. When is national pie day?
-51. Could you refrain from drinking pop, it gives me gas.
-52. I prefer coke over pepsi.
-53. I like cats..
-54. I don't like cats..
-55. I am afraid of snow
-56. Sloppy Joes don't have to be sloppy if made differently
-57. The only way I can explain it is as seeing your 3rd grade math teacher naked
-58. My brain is swollen
-59. No paperclip, I do not need your help
-60. Why am I so amazing?
-61. I am about to loose my shoestring
-62. Do you have an extra earring that I can use?
-63. Please don't lick my face in that mannor
-64. If you pinch his butt I will give you a quarter
-65. I have read a total of 4 and 1/2 books in my lifetime
-66. You do know there are no real vampires?
-67. When you lick my armpits it tickles.
-68. Why say "I'm fuming" if your not on fire?
-69. Yes this is my street, I own it
-70. If your house was in the middle of the street that would be very dangerous
-71. If you are Irish, you are born a great drinker.
-72. Dogs smaller than a football are not real dogs at all.
-73. It's 5:15 at nigh..do you know where your kids are?
-74. I dare you to show your face!
-75. If you park in the handicap spot I promise to limp into the store..
-76. Your gerbil is giving me the stink eye.
-77. Does this mean I get to keep my dictionary?
-78. You know I don't know spanish.
-79. I could see he wanted to joust with the table legs
-80. I have sass coming out of my ass
-81. SAFETY DANCE!
-82. No one makes me bleed my own blood
-83. My tire totally flew off of my car this morning
-84.  Would you like to kiss my flamingo?
-85. The penguins are in the kitchen.
-86. I carry eyeliner and small puppies in my purse.
-87. You support me, like a bra.
-88.We can't eat the bald eagle, they are endangered.
-89. Save the Whales!
-90. I own the heart of the ocean.
-91. You make me feel like I need to poop.
-92. When I sit, you stand..ready go!
-93. This weekend is the best night ever!
-94. I am super cool.
-95. Oh silly boy, tricks are for kids.
-96. Mommy always told me I would be prom King (queen)
-97. Lies are like fake truths
-98. If you ask for my number I may give you the rejection hotline
-99. Ninjas are really good at basketball.
-100. Sometimes your carpet makes me really angry.
+Akkadian Empire
+Confucius's "Analects"
+Babylonians
+Book of the Dead
+Chavin
+City-state
+Civilization
+Confucianism
+Cultural Diffusion
+Cultural Hearths
+Cuneiform
+Dynastic cycle
+"Epic of Gilgamesh"
+Fertile Crescent
+Hammurabi's Code
+Harappa
+Bronze Age
+Loess
+Mandate of Heaven
+Matrilineal
+Mesopotamia
+Minoans
+Monsoons
+Olmec
+Oracle Bones
+Papyrus
+Patriarchy
+Pharaoh
+Pictographs
+Rosetta Stone
+Shaman
+Shang Dynasty
+Social Mobility
+Sumerians
+Theocracy
+Tribute
+Vassals
+Zhao Dynasty
+Ziggurats
+"Tale of Genji"
+Alexander the Great
+Aristotle
+Ashoka
+Atman
+Attila the Hun
+Augustus Caesar (Octavian)
+Buddism
+Calligraphy
+Caste System
+Cleopatra
+Constantine
+Cyrus the Great
+Daoism
+Desertification
+Diocletian
+Etruscans
+Forbidden City
+Great Wall
+Classical Age of Greece
+Gupta Empire
+Han Wudi
+Hellenic Culture
+Hinduism
+Hoplites
+Julius Caesar
+Lao Tzu
+Lanteen Sail
+The 12 Tables
+Legalism
+Marathon
+Mark Antony
+Mauryan Dynasty
+Monarchy
+Arisocracy
+Democracy
+Oceania
+Patricians
+Plebians
+Pax Romana
+Peloponnesian War
+Phoenicians
+Plato
+Polis
+Qin Dynasty
+Reincarnation
+Roman Empire
+Satraps
+Scholar-Gentry
+Secularism
+Roman Senate
+Shi Huangdi
+Siddhartha Gautama
+Socrates
+Stirrups
+Terra Cotta Army
+Upanishads
+Vedas
+Warring States Period (China)
+Xerxes
+Abraham
+Boddhisatva
+Daoism
+Dharma
+Diaspora
+Eightfold Path
+Animism
+Four Noble Truths
+Hebrew Bible (Torah)
+Hinduism
+Jesus of Nazareth
+Judaism
+Karma
+Moksha
+Monotheism
+Nirvana
+Paul the Apostle
+Polytheism
+Shiva
+Yin-Yang
+Abu Bakr
+Bedouins
+Black Stone (Kaaba)
+Caliph
+Five Pillars of Faith
+"Golden Age"
+Hadith
+Hajj
+Harem
+Hijrah
+Jihad
+Madrasas
+Minaret
+Mosque
+Muhammad
+People of the Book
+Qur'an
+Shari'a
+Shi'ites
+Sunnis
+Sufis
+Sultan
+"A Thousand and One Nights"
+Umma
+Umayyad Dynasty
+Vizier
+Barter
+Benedictine Rule
+Byzantine Empire
+Caesaropapism
+Canon Law
+Carolingian Family
+Charlemange
+Clovis
+The Crusades
+The Children's Crusade
+Excommunication
+Feudalism
+Franks
+Ghettos
+Guilds
+Hagia Sophia
+Heresy
+Holy Roman Empire
+Hundred Years' War
+Justinian
+Justinian's Code of Law
+Parliament
+Magna Carta
+Manorialism
+Missi Dominici
+Anno Domini
+Renaissance
+Saladin
+Sassanid Empire
+Serfs
+Theodora
+Usury
+Vernacular Languages
+Vikings
+Aztecs
+Cahokia
+Chinampas
+Post-Classical Meso-America
+Inca
+Quipu
+Maya
+Mit'a
+Moche
+Quechua
+Queztcoatl
+Slash and Burn Agriculture
+Tenochtitlan
+Teotihuacan
+Toltecs
+Tribute System
+The Black Death
+Champa Rice
+Equal Fields System
+Foot Binding
+Fujiwara Family
+Genghis Khan
+Hegemony
+Heian Era
+Khanate of the Golden Hoarde
+Khanate of the Great Khan
+Kowtow
+Kubliai Khan
+Li Bo
+"Middle Kingdom"
+Ming Dynasty
+Neo-Confucianism
+Pax Mongolica
+Ottoman Turks
+Samurai
+Shintoism
+Shogun
+Song Dynasty
+Sui Dynasty
+Tang Dynasty
+Temujin
+Yuan Dynasty
+Delhi Sultanate
+Diasporic Communities
+Ghana
+Great Zimbabwe
+Ibn Battuta
+Mali
+Mansa Musa
+Marco Polo
+Songhai
+Stateless Society
+Swahili Coast
+Caravel
+Cash Crops
+Castas
+Columbian Exchange
+Christopher Columbus
+Conquistadors
+Hernan Cortes
+Vasco Da Gama
+Bartolomeu Dias
+Creoles
+Encomienda
+Henry the Navigator
+Indentured Servitude
+Joint-Stock Companies
+Bartolome de las Casas
+Ferdinand Magellan
+Mercantilism
+Mestizos
+Middle Passage
+Human Sacrifice
+Moctezuma
+Mulattos
+Peninsulares
+Francisco Pizarro
+Protestants
+Treaty of Tordesillas
+Viceroyalties
+Yongle
+Zheng He
+Akbar
+Babur
+Gunpowder Empires
+Imam
+Janissaries
+Mughal Empire
+Eunuch
+Ottoman Empire
+Safavid Empire
+Sati
+Sikhism
+Suleiman the Magnificient
+Taj Mahal
+Boyars
+Cossacks
+Daimyo
+Tokugawa Ieyasu
+Ivan IV
+Jesuits
+Kabuki
+Ming Dynasty
+Peter the Great
+Qing Dynasty
+Queue
+Romanov Family
+Tokugawa Shogunate
+Slavery
+Abolitionists
+Otto von Bismarck
+Simon Bolivar
+Bourgeoisie
+Congress of Vienna
+Declaration of the Rights of Man and Citizen
+Federalist System
+French and Indian War
+Father Miguel Hidalgo Y Costilla
+Junta
+Louis XVI
+Napoleon Bonaparte
+Nationalism
+National Assembly
+Reign of Terror
+Toussaint L'Ouverture
+US Declaration of Independence
+George Washington
+Battle of Waterloo
+Mary Wollstonecraft
+The Communist Manifesto
+Corporations
+Cult of Domesticity
+Electric Telegraph
+Enclosure Movement
+Samuel Gompers
+Industrial Revolution
+Interchangeable Parts
+Laissez-Faire
+Karl Marx
+Mass Production
+Monopolies
+Proletariat
+Adam Smith
+Socialism
+James Watt
+"The Wealth of Nations"
+Launching the plague bodies to quell resistance
+Pulling out the still beating heart of your victim before kicking them down the stairs
+Eli Whitney
+Josiah Wedgewood
+Charles Darwin
+Oedipus Complex, Mr. Freud?
+The Trail of Tears
+Isolationism
+Monroe Doctrine
+Anarchists
+Boxer Rebellion
+Canton System
+Catherine the Great
+Crimean War
+The sweet finality of the guillotine
+Intelligentsia
+Meiji Restoration
+Most Favored Nation Status
+Florence Nightingale
+Opium Wars
+When Matthew Perry points his big black ships at you.
+Spheres of Influence
+Bessemer Steel
+British Raj
+Captain James Cook
+Imperialism
+Panama Canal
+Scramble for Africa
+Sepoy Rebellion
+Suez Canal
+Disease
+Appeasement Policy
+Aryans
+Battle of the Bulge
+Battle of Midway
+Bolsheviks
+The Spanish Inquisition
+Central Powers
+Chiang Kai-shek
+Winston Churchill
+Cixi ruining the year of the sheep for everyone.
+Conscription
+D-Day. Yeah, that D doesn't stand for anything.
+Eastern Front
+Fascism
+Five Year Plans
+Fourteen Points
+Genocide
+Great Depression
+Adolf Hitler
+Holocaust
+League of Nations
+Lenin's Perfectly Preserved Corpse
+Mandate System
+Mao Zedong
+Munich Conference
+Rape of Nanking
+Benito Mussolini
+Nationalism
+Nazi Party
+New Deal
+Pearl Harbor
+Protectionism
+Reparations
+Revolution of 1911 (China)
+Joseph Stalin
+Total War
+Trench Warfare
+Triple Entente
+Versailles Treaties
+Weimar Republic
+Apartheid
+Fidel Castro
+Containment
+Civil Disobedience
+Cuban Missile Crisis
+Decolonization
+Charles De Gaulle
+UN
+Gandhi
+Che Guevara
+Ho Chi Minh
+Iranian Cultural Revolution
+Ataturk
+Ruhollah Khomeini
+Nikita Khruschev
+Nelson Mandela
+Marshall Plan
+NATO
+Pahlavi Dynasty
+When the CIA decides you need a new "American Friendly" government
+Eva Peron
+Augusto Pinochet
+FDR
+Space Race
+Sputnik
+Third World
+Al-Qaeda
+Command Economy
+Cultural Imperialism
+Domino Theory
+European Union
+Global Elite Culture
+Global Pop Culture
+Glasnost
+Green Revolution
+Human Rights Movement
+Saddam Hussein
+NAFTA
+ICBMs
+Vladimir Putin
+Stateless Nations
+WMDs
+Tienanmen Square
+A Massive Nuclear Buildup
+The Ravaging Mongol Hoarde
+Sweet Totalitarian Rule
+Shell Shock!
+Early Christians' attitudes toward bathing
+Pollution
+The looming dread, stress, and night terrors created by the AP Exam
+The camel saddle
+A hard day's work in the Potosi mines
+The Dutch East India Company
+Pirates of the Caribbean
+Land-Owning Elites
+Merchants
+Caravanserai
+The Aqueducts
+World Cup Soccer
+Women's Rights
+Landing on the Moon
+James Bond
+Ultra-Violent Video Games
