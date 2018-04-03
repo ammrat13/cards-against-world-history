@@ -1,4 +1,5 @@
 import java.util.*;
+import java.net.*;
 
 public class Request {
 
@@ -15,7 +16,7 @@ public class Request {
 
 		params = new HashMap<String, String>();
 		for(int i=1; i<toks.length; i++)
-			params.put(toks[i].split("=")[0], toks[i].split("=")[1]);
+			params.put(toks[i].split("=")[0], URLDecoder.decode(toks[i].split("=")[1]));
 	}
 
 	@Override

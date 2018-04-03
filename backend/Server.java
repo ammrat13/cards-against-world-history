@@ -163,7 +163,7 @@ public class Server {
 			// Join a game
 			if(req.page.equals("/join_game.html")){
 				if(games.get(req.params.get("pin")) != null){
-					String pid = games.get(req.params.get("pin")).join();
+					String pid = games.get(req.params.get("pin")).join(req.params.get("pid"));
 					if(pid != null)
 						out.print(pid);
 					else
@@ -240,7 +240,7 @@ public class Server {
 			// Play a card
 			if(req.page.equals("/play_card.html")){
 				if(games.get(req.params.get("pin")) != null){
-					games.get(req.params.get("pin")).play(req.params.get("pid"), URLDecoder.decode(req.params.get("card")));
+					games.get(req.params.get("pin")).play(req.params.get("pid"), req.params.get("card"));
 					out.print("DONE");
 				} else {
 					out.print("FAIL");
@@ -250,7 +250,7 @@ public class Server {
 			// Select a card
 			if(req.page.equals("/select_card.html")){
 				if(games.get(req.params.get("pin")) != null){
-					games.get(req.params.get("pin")).select(URLDecoder.decode(req.params.get("card")));
+					games.get(req.params.get("pin")).select(req.params.get("card"));
 					out.print("DONE");
 				} else {
 					out.print("FAIL");

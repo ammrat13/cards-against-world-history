@@ -46,18 +46,18 @@ public class Game {
 		dealBlack();
 	}
 
-	public String join(){
-		if(playerScores.size()*10 + 10 <= WDECK.size()){
+	public String join(String p){
+		if(playerScores.size()*10 + 10 <= WDECK.size() && p != null && !pids.contains(p)){
 			playerScores.add(0);
 			playerHands.add(new ArrayList<String>());
-			pids.add(Integer.toString(playerScores.size()-1));
+			pids.add(p);
 			deal();
 
 			if(cardCzar == -1)
 				cardCzar = 0;
 
 			// Return player id
-			return Integer.toString(playerScores.size()-1);
+			return p;
 		} else {
 			return null;
 		}
