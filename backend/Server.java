@@ -34,7 +34,8 @@ public class Server {
 		"/play_card.html",
 		"/select_card.html",
 		"/is_card_czar.html",
-		"/get_score.html"
+		"/get_score.html",
+		"/get_leaderboard.html"
 	};
 
 	// How many games we have had
@@ -270,6 +271,15 @@ public class Server {
 			if(req.page.equals("/get_score.html")){
 				if(games.get(req.params.get("pin")) != null){
 					out.print(games.get(req.params.get("pin")).playerScores.get(games.get(req.params.get("pin")).pids.indexOf(req.params.get("pid"))));
+				} else {
+					out.print("INVALID");
+				}
+			}
+
+			// Get leaderboard
+			if(req.page.equals("/get_leaderboard.html")){
+				if(games.get(req.params.get("pin")) != null){
+					out.print(games.get(req.params.get("pin")).getLeaderboard());
 				} else {
 					out.print("INVALID");
 				}

@@ -7,6 +7,7 @@ var dealtCards = [];
 var fieldCards = [];
 var handCards = [];
 
+var leader = false;
 var slickInited = false;
 
 function slickReload(){
@@ -131,7 +132,7 @@ function update(){
 		}
 	});
 
-	$.get("/get_hand.html?pin=" + pin + "&pid=" + pid, function(data){
+	$.get(encodeURI("/get_hand.html?pin=" + pin + "&pid=" + pid), function(data){
 		if(data.trim() !== "INVALID"){
 			var ds = data.split("\n");
 			if(data.trim() === "DONE"){
@@ -153,7 +154,7 @@ function update(){
 		}
 	});
 
-	$.get("/is_card_czar.html?pin=" + pin + "&pid=" + pid, function(data){
+	$.get(encodeURI("/is_card_czar.html?pin=" + pin + "&pid=" + pid), function(data){
 		if(data === "true"){
 			$("#card-czar-alert").effect("slide", {direction: "right", mode: "show"}, 500);
 			$("#field-go").removeClass("disabled");
@@ -172,9 +173,26 @@ function update(){
 		}
 	});
 
-	$.get("/get_score.html?pin=" + pin + "&pid=" + pid, function(data){
+	$.get(encodeURI("/get_score.html?pin=" + pin + "&pid=" + pid), function(data){
 		if(data !== "INVALID"){
 			$("#score").html(data);
+		}
+	});
+
+	$.get("/get_leaderboard.html?pin=" + pin, function(data){
+		if(data !== "INVALID"){
+			// Remove all entrys
+			$("#leader-body tr").each(function(){
+				$(this).remove();
+			});
+			// Update entrys
+			var scoreStrs = data.split(";");
+			for(var i=0; i<scoreStrs.length; i++){
+				$("#leader-body").append('<tr id="' + i + '"> </tr>');
+				$("#"+i).append('<th scope="row">' + i + '</th>');
+				$("#"+i).append("<td>" + scoreStrs[i].split(",")[0] + "</td>");
+				$("#"+i).append("<td>" + scoreStrs[i].split(",")[1] + "</td>");
+			}
 		}
 	});
 }
@@ -197,6 +215,17 @@ $(document).ready(function(){
 	// Slick needs this to work with tabs
 	$('a[data-toggle=tab]').on("shown.bs.tab", function(e){
 		slickReload();
+	});
+
+	$("#leader-btn").click(function(){
+		$("#leaderboard").slideToggle(function(){});
+		if(!leader){
+			$("#leader-btn").html('<i class="fa fa-chevron-down"></i> Leaderboard');
+			leader = true;
+		} else {
+			$("#leader-btn").html('<i class="fa fa-chevron-right"></i> Leaderboard');
+			leader = false;
+		}
 	});
 
 	$("#field-go").click(function(){

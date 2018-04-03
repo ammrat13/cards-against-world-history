@@ -125,6 +125,33 @@ public class Game {
 		dealBlack();
 	}
 
+	public String getLeaderboard(){
+		// Copy the scores list so we don't destroy it
+		ArrayList<Integer> pScoresCopy = new ArrayList<Integer>(playerScores);
+		ArrayList<Integer> scoreIdxs = new ArrayList<Integer>();
+		
+		while(!pScoresCopy.isEmpty()){
+			int max = pScoresCopy.get(0);
+			int maxIdx = 0;
+			for(int i=0; i<pScoresCopy.size(); i++){
+				if(pScoresCopy.get(i) > max){
+					max = pScoresCopy.get(i);
+					maxIdx = i;
+				}
+			}
+			scoreIdxs.add(maxIdx);
+			pScoresCopy.remove(maxIdx);
+		}
+
+		String ret = "";
+		for(int i=0; i<scoreIdxs.size(); i++){
+			ret += pids.get(scoreIdxs.get(i)) + "," + playerScores.get(scoreIdxs.get(i));
+			if(i != scoreIdxs.size()-1)
+				ret += ";";
+		}
+		return ret;
+	}
+
 	public void deal(){
 		// Deal hands
 		for(ArrayList<String> hand : playerHands){

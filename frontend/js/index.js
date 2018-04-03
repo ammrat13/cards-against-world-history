@@ -11,7 +11,7 @@ function verifyPin(pin){
 }
 
 function verifyPid(pid){
-	return pid !== "";
+	return pid !== "" && !pid.includes(",") && !pid.includes(";");
 }
 
 function createPin(){
