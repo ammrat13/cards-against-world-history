@@ -34,6 +34,53 @@
 				document.write(window.localStorage.getItem("pin"));
 			</script></h4></center>
 		</div>
+		<div class="breaker-md"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<div id="score-disp" class="alert alert-info text-center" role="alert">
+						<b><script>document.write(window.localStorage.getItem("pid"))</script>'s Score: <span id="score">0</span></b>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div id="card-czar-alert" class="alert alert-success text-center initially-hidden" role="alert">
+						<b>You are the Card Czar</b>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div id="tabs" class="nav nav-tabs nav-justified" role="tablist">
+				<a id="dealt-tab" href="#dealt" class="nav-item nav-link active" data-toggle="tab" role="tab" aria-controls="dealt" aria-selected="true">Dealt</a>
+				<a id="field-tab" href="#field" class="nav-item nav-link" data-toggle="tab" role="tab" aria-controls="field" aria-selected="false">Field</a>
+				<a id="hand-tab" href="#hand" class="nav-item nav-link" data-toggle="tab" role="tab" aria-controls="hand" aria-selected="false">Hand</a>
+			</div>
+			<div class="tab-content" id="tabsContent">
+				<div id="dealt" class="tab-pane show active" role="tabpanel" aria-labelledby="dealt-tab">
+					<div class="breaker"></div>
+					<div id="dealt-card-carousel" class="card-carousel">
+
+					</div>
+					<div class="breaker"></div>
+				</div>
+				<div id="field" class="tab-pane" role="tabpanel" aria-labelledby="field-tab">
+					<div class="breaker"></div>
+					<div id="field-card-carousel" class="card-carousel">
+						
+					</div>
+					<div class="breaker"></div>
+					<button id="field-go" class="btn btn-success btn-lg btn-block disabled" type="button" disabled>Go</button>
+				</div>
+				<div id="hand" class="tab-pane" role="tabpanel" aria-labelledby="hand-tab">
+					<div class="breaker"></div>
+					<div id="hand-card-carousel" class="card-carousel">
+						
+					</div>
+					<div class="breaker"></div>
+					<button id="hand-go" class="btn btn-success btn-lg btn-block disabled" type="button" disabled>Go</button>
+				</div>
+			</div>
+		</div>
 		<div class="breaker-sm"></div>
 		<div class="container">
 			<button id="leader-btn" type="button" class="btn btn-primary btn-block" onclick="">
@@ -53,53 +100,6 @@
 
 					</tbody>
 				</table>
-			</div>
-		</div>
-		<div class="breaker-md"></div>
-		<div class="container">
-			<div id="tabs" class="nav nav-tabs nav-justified" role="tablist">
-				<a id="dealt-tab" href="#dealt" class="nav-item nav-link active" data-toggle="tab" role="tab" aria-controls="dealt" aria-selected="true">Dealt</a>
-				<a id="field-tab" href="#field" class="nav-item nav-link" data-toggle="tab" role="tab" aria-controls="field" aria-selected="false">Field</a>
-				<a id="hand-tab" href="#hand" class="nav-item nav-link" data-toggle="tab" role="tab" aria-controls="hand" aria-selected="false">Hand</a>
-			</div>
-			<div class="tab-content" id="tabsContent">
-				<div id="dealt" class="tab-pane show active" role="tabpanel" aria-labelledby="dealt-tab">
-					<div class="breaker"></div>
-					<div id="dealt-card-carousel" class="card-carousel">
-
-					</div>
-					<div class="breaker"></div>
-					<button style="visibility: hidden;" class="btn btn-success btn-lg btn-block" type="button">Hidden Button for Alignment</button>
-				</div>
-				<div id="field" class="tab-pane" role="tabpanel" aria-labelledby="field-tab">
-					<div class="breaker"></div>
-					<div id="field-card-carousel" class="card-carousel">
-						
-					</div>
-					<div class="breaker"></div>
-					<button id="field-go" class="btn btn-success btn-lg btn-block disabled" type="button" disabled>Go</button>
-				</div>
-				<div id="hand" class="tab-pane" role="tabpanel" aria-labelledby="hand-tab">
-					<div class="breaker"></div>
-					<div id="hand-card-carousel" class="card-carousel">
-						
-					</div>
-					<div class="breaker"></div>
-					<button id="hand-go" class="btn btn-success btn-lg btn-block disabled" type="button" disabled>Go</button>
-				</div>
-			</div>
-			<div class="breaker-md"></div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div id="score-disp" class="alert alert-info text-center" role="alert">
-						<b><script>document.write(window.localStorage.getItem("pid"))</script>'s Score: <span id="score">0</span></b>
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div id="card-czar-alert" class="alert alert-success text-center initially-hidden" role="alert">
-						<b>You are the Card Czar</b>
-					</div>
-				</div>
 			</div>
 		</div>
 	</body>
