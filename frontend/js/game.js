@@ -189,7 +189,7 @@ function update(){
 			var scoreStrs = data.split(";");
 			for(var i=0; i<scoreStrs.length; i++){
 				$("#leader-body").append('<tr id="' + i + '"> </tr>');
-				$("#"+i).append('<th scope="row">' + i + '</th>');
+				$("#"+i).append('<th scope="row">' + (i+1) + '</th>');
 				$("#"+i).append("<td>" + scoreStrs[i].split(",")[0] + "</td>");
 				$("#"+i).append("<td>" + scoreStrs[i].split(",")[1] + "</td>");
 			}
@@ -218,11 +218,15 @@ $(document).ready(function(){
 	});
 
 	$("#leader-btn").click(function(){
-		$("#leaderboard").slideToggle(function(){});
 		if(!leader){
+			$("#leaderboard").slideDown();
 			$("#leader-btn").html('<i class="fa fa-chevron-down"></i> Leaderboard');
 			leader = true;
 		} else {
+			$("#leaderboard").slideUp(function(){
+				// Hack to scroll to top while hidden
+				$("#leaderboard").replaceWith('<div id="leaderboard" class="card initially-hidden">' + $("#leaderboard").html() + '</div>');
+			});
 			$("#leader-btn").html('<i class="fa fa-chevron-right"></i> Leaderboard');
 			leader = false;
 		}

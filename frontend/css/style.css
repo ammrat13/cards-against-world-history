@@ -45,3 +45,8 @@ body{
 .breaker-sm{
 	height: 10px;
 }
+
+#leaderboard{
+	height: 50vh;
+	overflow: auto;
+}
