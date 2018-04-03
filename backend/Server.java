@@ -37,8 +37,8 @@ public class Server {
 		"/get_score.html"
 	};
 
-	// How many connections we have had
-	public static int connCount = 0;
+	// How many games we have had
+	public static int gameCount = 0;
 
 	// The array of all the games we are playing
 	public static HashMap<String,Game> games = new HashMap<String,Game>();
@@ -50,12 +50,10 @@ public class Server {
 			// Do this as long as the program is running
 			while(true){
 				Socket conn = serv.accept();
-				connCount = (connCount + 1) % Integer.MAX_VALUE;
 
 				System.out.println("Connected to " + conn.getRemoteSocketAddress());
-				System.out.println("Connection ID: " + connCount);
 
-				new Thread(new ConnectionHandler(connCount, conn)).start();
+				new Thread(new ConnectionHandler(conn)).start();
 			}
 		} catch (IOException e){
 			e.printStackTrace();
@@ -64,14 +62,12 @@ public class Server {
 
 	public static class ConnectionHandler implements Runnable {
 
-		public int connID = -1;
 		public Socket conn = null;
 		public BufferedReader in = null;
 		public PrintWriter out = null;
 
-		public ConnectionHandler(int connID, Socket conn){
+		public ConnectionHandler(Socket conn){
 			try {
-				this.connID = connID;
 				this.conn = conn;
 				in = new BufferedReader(new InputStreamReader(this.conn.getInputStream()));
 				out = new PrintWriter(new OutputStreamWriter(this.conn.getOutputStream()));
@@ -158,7 +154,8 @@ public class Server {
 
 			// Create a game
 			if(req.page.equals("/create_game.html")){
-				String pin = String.format("%010d", connID);
+				gameCount = (gameCount + 1) % 1000000;
+				String pin = String.format("%06d", gameCount);
 				games.put(pin, new Game());
 				out.print(pin);
 			}

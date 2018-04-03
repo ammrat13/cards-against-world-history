@@ -37,6 +37,9 @@
 						<label for="join-pin">Game PIN:</label>
 						<input class="form-control input-lg" id="join-pin" type="text" style="font-weight: bold; text-align: center;"/>
 						<div class="breaker-sm"></div>
+						<label for="join-pid">Name:</label>
+						<input class="form-control input-lg" id="join-pid" type="text" style="font-weight: bold; text-align: center;"/>
+						<div class="breaker-sm"></div>
 						<button id="join-go" type="button" class="btn btn-success btn-block" onclick="">
 							Go
 						</button>
@@ -50,12 +53,16 @@
 				</button>
 				<div class="breaker-sm"></div>
 				<div id="create-card" class="card initially-hidden">
-					<centering>Game PIN:</centering>
-					<h5><b id="create-pin">Loading...</b></h5>
-					<div class="breaker-sm"></div>
-					<button id="create-go" type="button" class="btn btn-success btn-block disabled" onclick="" disabled>
-						Go
-					</button>
+					<div id="join-group" class="form-group">
+						<centering>Game PIN:</centering>
+						<h5><b id="create-pin">Loading...</b></h5>
+						<label for="join-pid">Name:</label>
+						<input class="form-control input-lg" id="join-pid" type="text" style="font-weight: bold; text-align: center;"/>
+						<div class="breaker-sm"></div>
+						<button id="create-go" type="button" class="btn btn-success btn-block disabled" onclick="" disabled>
+							Go
+						</button>
+					</div>
 				</div>
 			</center>
 		</div>
