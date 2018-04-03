@@ -279,8 +279,7 @@ public class Server {
 			// Get leaderboard
 			if(req.page.equals("/get_leaderboard.html")){
 				if(games.get(req.params.get("pin")) != null){
-					//out.print(games.get(req.params.get("pin")).getLeaderboard());
-					out.print("a,0;b,1;c,2;d,3;e,4;f,5;g,6;h,7;i,8;j,10");
+					out.print(games.get(req.params.get("pin")).getLeaderboard());
 				} else {
 					out.print("INVALID");
 				}

@@ -126,21 +126,18 @@ public class Game {
 	}
 
 	public String getLeaderboard(){
-		// Copy the scores list so we don't destroy it
-		ArrayList<Integer> pScoresCopy = new ArrayList<Integer>(playerScores);
 		ArrayList<Integer> scoreIdxs = new ArrayList<Integer>();
-		
-		while(!pScoresCopy.isEmpty()){
-			int max = pScoresCopy.get(0);
-			int maxIdx = 0;
-			for(int i=0; i<pScoresCopy.size(); i++){
-				if(pScoresCopy.get(i) > max){
-					max = pScoresCopy.get(i);
+
+		for(int j=0; j<playerScores.size(); j++){
+			int max = Integer.MIN_VALUE;
+			int maxIdx = -1;
+			for(int i=0; i<playerScores.size(); i++){
+				if(!scoreIdxs.contains(i) && playerScores.get(i) > max){
+					max = playerScores.get(i);
 					maxIdx = i;
 				}
 			}
 			scoreIdxs.add(maxIdx);
-			pScoresCopy.remove(maxIdx);
 		}
 
 		String ret = "";

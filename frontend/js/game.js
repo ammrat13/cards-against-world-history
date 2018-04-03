@@ -181,7 +181,7 @@ function update(){
 
 	$.get("/get_leaderboard.html?pin=" + pin, function(data){
 		if(data !== "INVALID"){
-			// Remove all entrys
+			// Remove all entries
 			$("#leader-body tr").each(function(){
 				$(this).remove();
 			});
