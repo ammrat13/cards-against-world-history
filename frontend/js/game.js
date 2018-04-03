@@ -6,6 +6,7 @@ var oldDealt = [];
 var dealtCards = [];
 var fieldCards = [];
 var handCards = [];
+var score = 0;
 
 var leader = false;
 var slickInited = false;
@@ -176,6 +177,11 @@ function update(){
 	$.get(encodeURI("/get_score.html?pin=" + pin + "&pid=" + pid), function(data){
 		if(data !== "INVALID"){
 			$("#score").html(data);
+			var nscore = parseInt(data);
+			if(nscore !== score){
+				score = nscore;
+				$.notify("You won!");
+			}
 		}
 	});
 
