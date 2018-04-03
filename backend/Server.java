@@ -33,7 +33,7 @@ public class Server {
 		"/get_hand.html",
 		"/play_card.html",
 		"/select_card.html",
-		"/is_card_czar.html",
+		"/get_card_czar.html",
 		"/get_score.html",
 		"/get_leaderboard.html"
 	};
@@ -90,6 +90,7 @@ public class Server {
 				conn.close();
 			} catch (IOException e){
 				e.printStackTrace();
+				conn.close();
 			}
 		}
 
@@ -259,9 +260,13 @@ public class Server {
 			}
 
 			// Is card czar
-			if(req.page.equals("/is_card_czar.html")){
+			if(req.page.equals("/get_card_czar.html")){
 				if(games.get(req.params.get("pin")) != null){
-					out.print(games.get(req.params.get("pin")).cardCzar == games.get(req.params.get("pin")).pids.indexOf(req.params.get("pid")));
+					String res = games.get(req.params.get("pin")).pids.get(games.get(req.params.get("pin")).cardCzar);
+					if(res != null)
+						out.println(res);
+					else
+						out.println("INVALID");
 				} else {
 					out.print("INVALID");
 				}

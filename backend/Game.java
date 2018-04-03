@@ -94,6 +94,8 @@ public class Game {
 	}
 
 	public void setCardCzar(){
+		if(playerScores.size() == 1)
+			cardCzar = 0;
 		// Set it to a random player without replacement
 		int cardCzarOld = cardCzar;
 		while(cardCzarOld == cardCzar)

@@ -7,6 +7,7 @@ var dealtCards = [];
 var fieldCards = [];
 var handCards = [];
 var score = 0;
+var cardCzar = false;
 
 var leader = false;
 var slickInited = false;
@@ -155,15 +156,35 @@ function update(){
 		}
 	});
 
-	$.get(encodeURI("/is_card_czar.html?pin=" + pin + "&pid=" + pid), function(data){
-		if(data === "true"){
-			$("#card-czar-alert").effect("slide", {direction: "right", mode: "show"}, 500);
+	$.get(encodeURI("/get_card_czar.html?pin=" + pin), function(data){
+		if(data.trim() === pid){
+			// Alert if we were not previously
+			if(!cardCzar){
+				$.notify({
+					title: "<b>You Are the Card Czar: </b>",
+					message: "Pick the funniest card played"
+				},{
+					type: "success",
+					newest_on_top: true,
+					delay: 3000,
+					animate: {
+						enter: "animated fadeInDown",
+						exit: "animated fadeOutUp"
+					},
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				});
+			}
+			$("#card-czar-text").html("You are");
 			$("#field-go").removeClass("disabled");
 			$("#field-go").prop("disabled", false);
 			$("#hand-go").addClass("disabled");
 			$("#hand-go").prop("disabled", true);
-		} else if(data === "false"){
-			$("#card-czar-alert").effect("slide", {direction: "right", mode: "hide"}, 500);
+			cardCzar = true;
+		} else if(data !== "INVALID"){
+			$("#card-czar-text").html(data.trim() + " is");
 			$("#field-go").addClass("disabled");
 			$("#field-go").prop("disabled", true);
 			if(dealtCards !== oldDealt){
@@ -171,6 +192,7 @@ function update(){
 				$("#hand-go").removeClass("disabled");
 				$("#hand-go").prop("disabled", false);
 			}
+			cardCzar = false;
 		}
 	});
 
