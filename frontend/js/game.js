@@ -180,7 +180,22 @@ function update(){
 			var nscore = parseInt(data);
 			if(nscore !== score){
 				score = nscore;
-				$.notify("You won!");
+				$.notify({
+					title: "<b>You Scored: </b>",
+					message: "Your score increased by 1"
+				},{
+					type: "success",
+					newest_on_top: true,
+					delay: 3000,
+					animate: {
+						enter: "animated fadeInDown",
+						exit: "animated fadeOutUp"
+					},
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				});
 			}
 		}
 	});
