@@ -90,7 +90,6 @@ public class Server {
 				conn.close();
 			} catch (IOException e){
 				e.printStackTrace();
-				conn.close();
 			}
 		}
 
