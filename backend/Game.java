@@ -81,10 +81,11 @@ public class Game {
 
 			pids.remove(pid);
 
-			// Special handling if the card czar leaves
-			if(pid == cardCzar)
-				setCardCzar();
-			else if(pid < cardCzar)
+			// If the card czar leaves it will naturally go to the next person
+			// Special handling if the card czar leaves and is the last person
+			if(cardCzar == playerScores.size())
+				cardCzar = 0;
+			if(pid < cardCzar)
 				cardCzar--;
 
 			deal();
@@ -94,12 +95,11 @@ public class Game {
 	}
 
 	public void setCardCzar(){
-		if(playerScores.size() == 1)
-			cardCzar = 0;
-		// Set it to a random player without replacement
-		int cardCzarOld = cardCzar;
-		while(cardCzarOld == cardCzar)
-			cardCzar = (int) (Math.random()*playerScores.size());
+		// Set it to the next player
+		if(playerScores.size() == 0)
+			cardCzar = -1;
+		else
+			cardCzar = (cardCzar + 1) % playerScores.size();
 	}
 
 	public void play(String p, String card){

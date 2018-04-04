@@ -204,7 +204,7 @@ function update(){
 				score = nscore;
 				$.notify({
 					title: "<b>You Scored: </b>",
-					message: "Your score increased by 1"
+					message: "Your score increased by one"
 				},{
 					type: "success",
 					newest_on_top: true,
