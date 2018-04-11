@@ -91,6 +91,7 @@ function removeHand(s){
 // Called every so often
 function update(){
 	$.get("/get_dealt.txt?pin=" + pin, function(data){
+		console.log("get_dealt: " + data);
 		if(data.trim() !== "INVALID"){
 			var ds = data.split("\n");
 			if(data.trim() === "DONE"){
