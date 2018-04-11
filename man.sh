@@ -3,7 +3,9 @@
 # For managing the server
 # Pass `up` to start and `down` to stop
 
-if [[ $1 == "up" ]]; then
+if [[ $1 == "" ]]; then
+	echo "No arguments present"
+elif [[ $1 == "up" ]]; then
 	# Check if we already have it up
 	wget -q --spider localhost
 	if [[ $? -eq 0 ]]; then

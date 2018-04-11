@@ -39,21 +39,24 @@ function createPid(g){
 }
 
 function joinPinAndPid(pin, g){
-	// We only need to check for pin as if it is present, pid is present
-	$.get(encodeURI("/join_game.txt?pin=" + pin + "&pid=" + $("#join-pid").val()), function(data){
-		if(data.trim() !== "INVALID"){
-			window.localStorage.setItem("pin", pin);
-			window.localStorage.setItem("pid", data.trim());
-			if(g){
-				go();
+	// Leave the game we created for create
+	$.get(encodeURI("/leave_game.txt?pin=" + window.localStorage.getItem("pin")), function(data){
+		// We only need to check for pin as if it is present, pid is present
+		$.get(encodeURI("/join_game.txt?pin=" + pin + "&pid=" + $("#join-pid").val()), function(data){
+			if(data.trim() !== "INVALID"){
+				window.localStorage.setItem("pin", pin);
+				window.localStorage.setItem("pid", data.trim());
+				if(g){
+					go();
+				}
+			} else {
+				$("#join-go").html("Go");
+				$("#join-go").removeClass("disabled");
+				$("#join-go").prop("disabled", false);
+				$("#join-pin").prop("disabled", false);
+				$("#join-pin").addClass("is-invalid");
 			}
-		} else {
-			$("#join-go").html("Go");
-			$("#join-go").removeClass("disabled");
-			$("#join-go").prop("disabled", false);
-			$("#join-pin").prop("disabled", false);
-			$("#join-pin").addClass("is-invalid");
-		}
+		});
 	});
 }
 
