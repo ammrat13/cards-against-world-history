@@ -1,4 +1,6 @@
 # Journal
+**4/10/2018**: Changed file names and did `robots.txt`\
+**4/9/2018**: Did networking\
 **4/5/2018**: Made the presentation\
 **4/4/2018**: Play-tested and bug-fixed\
 **4/3/2018**: Implemented leaderboard and notifications\
