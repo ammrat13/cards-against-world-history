@@ -11,18 +11,18 @@ function verifyPin(pin){
 }
 
 function verifyPid(pid){
-	return /^[a-zA-Z0-9 ]+$/.test(pid);
+	return /^[a-zA-Z0-9 ]+$/.test(pid) && pid.length <= 25;
 }
 
 function createPin(){
-	$.get("/create_game.html", function(data){
+	$.get("/create_game.txt", function(data){
 		window.localStorage.setItem("pin", data.trim());
 		$("#create-pin").html(window.localStorage.getItem("pin"));
 	});
 }
 
 function createPid(g){
-	$.get(encodeURI("/join_game.html?pin=" + window.localStorage.getItem("pin") + "&pid=" + $("#create-pid").val()), function(data){
+	$.get(encodeURI("/join_game.txt?pin=" + window.localStorage.getItem("pin") + "&pid=" + $("#create-pid").val()), function(data){
 		if(data.trim() !== "INVALID"){
 			window.localStorage.setItem("pid", data.trim());
 			if(g){
@@ -40,7 +40,7 @@ function createPid(g){
 
 function joinPinAndPid(pin, g){
 	// We only need to check for pin as if it is present, pid is present
-	$.get(encodeURI("/join_game.html?pin=" + pin + "&pid=" + $("#join-pid").val()), function(data){
+	$.get(encodeURI("/join_game.txt?pin=" + pin + "&pid=" + $("#join-pid").val()), function(data){
 		if(data.trim() !== "INVALID"){
 			window.localStorage.setItem("pin", pin);
 			window.localStorage.setItem("pid", data.trim());

@@ -13,6 +13,7 @@ public class Server {
 
 	// The array of all the pure files
 	public final static String[] files = {
+		"/robots.txt",
 		"/index.html",
 		"/game.html",
 		"/js/index.js",
@@ -25,17 +26,17 @@ public class Server {
 	};
 	// The array of all special files
 	public final static String[] specFiles = {
-		"/create_game.html",
-		"/join_game.html",
-		"/leave_game.html",
-		"/get_dealt.html",
-		"/get_field.html",
-		"/get_hand.html",
-		"/play_card.html",
-		"/select_card.html",
-		"/get_card_czar.html",
-		"/get_score.html",
-		"/get_leaderboard.html"
+		"/create_game.txt",
+		"/join_game.txt",
+		"/leave_game.txt",
+		"/get_dealt.txt",
+		"/get_field.txt",
+		"/get_hand.txt",
+		"/play_card.txt",
+		"/select_card.txt",
+		"/get_card_czar.txt",
+		"/get_score.txt",
+		"/get_leaderboard.txt"
 	};
 
 	// How many games we have had
@@ -93,6 +94,10 @@ public class Server {
 			}
 		}
 
+		public String genPin(){
+			return String.format("%06d", (int) (1000000*Math.random()));
+		}
+
 		public void handleRequest(Request req){
 
 			// Headers
@@ -111,6 +116,8 @@ public class Server {
 						out.println("Content-Type: text/css");
 					if(req.page.endsWith(".js"))
 						out.println("Content-Type: text/javascript");
+					if(req.page.endsWith(".txt"))
+						out.println("Content-Type: text/plain");
 				} else if(Arrays.asList(imageFiles).contains(req.page)){
 					out.println("Content-Type: image/png");
 				} else if(Arrays.asList(specFiles).contains(req.page)){
@@ -154,15 +161,16 @@ public class Server {
 			// Special files and handling
 
 			// Create a game
-			if(req.page.equals("/create_game.html")){
-				gameCount = (gameCount + 1) % 1000000;
-				String pin = String.format("%06d", gameCount);
+			if(req.page.equals("/create_game.txt")){
+				String pin = genPin();
+				while(games.containsKey(pin))
+					pin = genPin();
 				games.put(pin, new Game());
 				out.print(pin);
 			}
 
 			// Join a game
-			if(req.page.equals("/join_game.html")){
+			if(req.page.equals("/join_game.txt")){
 				if(games.get(req.params.get("pin")) != null){
 					String pid = games.get(req.params.get("pin")).join(req.params.get("pid"));
 					if(pid != null)
@@ -175,10 +183,12 @@ public class Server {
 			}
 
 			// Leave a game
-			if(req.page.equals("/leave_game.html")){
+			if(req.page.equals("/leave_game.txt")){
 				if(games.get(req.params.get("pin")) != null){
 					try {
 						games.get(req.params.get("pin")).leave(req.params.get("pid"));
+						if(games.get(req.params.get("pin")).playerScores.size() == 0)
+							games.remove(req.params.get("pin"));
 						out.print("DONE");
 					} catch (NumberFormatException e){
 						e.printStackTrace();
@@ -190,7 +200,7 @@ public class Server {
 			}
 
 			// Get dealt
-			if(req.page.equals("/get_dealt.html")){
+			if(req.page.equals("/get_dealt.txt")){
 				if(games.get(req.params.get("pin")) != null){
 					String ret = "";
 					for(String s : games.get(req.params.get("pin")).dealt)
@@ -206,7 +216,7 @@ public class Server {
 			}
 
 			// Get field
-			if(req.page.equals("/get_field.html")){
+			if(req.page.equals("/get_field.txt")){
 				if(games.get(req.params.get("pin")) != null){
 					String ret = "";
 					for(Map.Entry<String,String> se : games.get(req.params.get("pin")).field)
@@ -222,7 +232,7 @@ public class Server {
 			}
 
 			// Get hand
-			if(req.page.equals("/get_hand.html")){
+			if(req.page.equals("/get_hand.txt")){
 				if(games.get(req.params.get("pin")) != null){
 					String ret = "";
 					for(String s : games.get(req.params.get("pin")).playerHands.get(
@@ -239,7 +249,7 @@ public class Server {
 			}
 
 			// Play a card
-			if(req.page.equals("/play_card.html")){
+			if(req.page.equals("/play_card.txt")){
 				if(games.get(req.params.get("pin")) != null){
 					games.get(req.params.get("pin")).play(req.params.get("pid"), req.params.get("card"));
 					out.print("DONE");
@@ -249,7 +259,7 @@ public class Server {
 			}
 
 			// Select a card
-			if(req.page.equals("/select_card.html")){
+			if(req.page.equals("/select_card.txt")){
 				if(games.get(req.params.get("pin")) != null){
 					games.get(req.params.get("pin")).select(req.params.get("card"));
 					out.print("DONE");
@@ -259,7 +269,7 @@ public class Server {
 			}
 
 			// Is card czar
-			if(req.page.equals("/get_card_czar.html")){
+			if(req.page.equals("/get_card_czar.txt")){
 				if(games.get(req.params.get("pin")) != null){
 					String res = games.get(req.params.get("pin")).pids.get(games.get(req.params.get("pin")).cardCzar);
 					if(res != null)
@@ -272,7 +282,7 @@ public class Server {
 			}
 
 			// Get Score
-			if(req.page.equals("/get_score.html")){
+			if(req.page.equals("/get_score.txt")){
 				if(games.get(req.params.get("pin")) != null){
 					out.print(games.get(req.params.get("pin")).playerScores.get(games.get(req.params.get("pin")).pids.indexOf(req.params.get("pid"))));
 				} else {
@@ -281,7 +291,7 @@ public class Server {
 			}
 
 			// Get leaderboard
-			if(req.page.equals("/get_leaderboard.html")){
+			if(req.page.equals("/get_leaderboard.txt")){
 				if(games.get(req.params.get("pin")) != null){
 					out.print(games.get(req.params.get("pin")).getLeaderboard());
 				} else {

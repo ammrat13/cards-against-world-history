@@ -90,7 +90,7 @@ function removeHand(s){
 
 // Called every so often
 function update(){
-	$.get("/get_dealt.html?pin=" + pin, function(data){
+	$.get("/get_dealt.txt?pin=" + pin, function(data){
 		if(data.trim() !== "INVALID"){
 			var ds = data.split("\n");
 			if(data.trim() === "DONE"){
@@ -112,7 +112,7 @@ function update(){
 		}
 	});
 
-	$.get("/get_field.html?pin=" + pin, function(data){
+	$.get("/get_field.txt?pin=" + pin, function(data){
 		if(data.trim() !== "INVALID"){
 			var ds = data.split("\n");
 			if(data.trim() === "DONE"){
@@ -134,7 +134,7 @@ function update(){
 		}
 	});
 
-	$.get(encodeURI("/get_hand.html?pin=" + pin + "&pid=" + pid), function(data){
+	$.get(encodeURI("/get_hand.txt?pin=" + pin + "&pid=" + pid), function(data){
 		if(data.trim() !== "INVALID"){
 			var ds = data.split("\n");
 			if(data.trim() === "DONE"){
@@ -156,7 +156,7 @@ function update(){
 		}
 	});
 
-	$.get(encodeURI("/get_card_czar.html?pin=" + pin), function(data){
+	$.get(encodeURI("/get_card_czar.txt?pin=" + pin), function(data){
 		if(data.trim() === pid){
 			// Alert if we were not previously
 			if(!cardCzar){
@@ -196,7 +196,7 @@ function update(){
 		}
 	});
 
-	$.get(encodeURI("/get_score.html?pin=" + pin + "&pid=" + pid), function(data){
+	$.get(encodeURI("/get_score.txt?pin=" + pin + "&pid=" + pid), function(data){
 		if(data !== "INVALID"){
 			$("#score").html(data);
 			var nscore = parseInt(data);
@@ -222,7 +222,7 @@ function update(){
 		}
 	});
 
-	$.get("/get_leaderboard.html?pin=" + pin, function(data){
+	$.get("/get_leaderboard.txt?pin=" + pin, function(data){
 		if(data !== "INVALID"){
 			// Remove all entries
 			$("#leader-body tr").each(function(){
@@ -248,7 +248,7 @@ $(document).ready(function(){
 	// Handle everything if the user goes away
 	$(window).on("beforeunload", function(){
 		// Clear pin and pid
-		$.get("/leave_game.html?pin=" + pin + "&pid=" + pid, function(data){});
+		$.get("/leave_game.txt?pin=" + pin + "&pid=" + pid, function(data){});
 		window.localStorage.removeItem("pin");
 		window.localStorage.removeItem("pid");
 	});
@@ -286,7 +286,7 @@ $(document).ready(function(){
 			$("#field-go").addClass("disabled");
 			$("#field-go").prop("disabled", true);
 			
-			$.get(encodeURI("/select_card.html?pin=" + pin + "&card=" + current), function(data){});
+			$.get(encodeURI("/select_card.txt?pin=" + pin + "&card=" + current), function(data){});
 		}
 	});
 
@@ -298,7 +298,7 @@ $(document).ready(function(){
 			$("#hand-go").addClass("disabled");
 			$("#hand-go").prop("disabled", true);
 			
-			$.get(encodeURI("/play_card.html?pin=" + pin + "&pid=" + pid + "&card=" + current), function(data){});
+			$.get(encodeURI("/play_card.txt?pin=" + pin + "&pid=" + pid + "&card=" + current), function(data){});
 		}
 	});
 
