@@ -244,9 +244,14 @@ $(document).ready(function(){
 	// Handle everything if the user goes away
 	$(window).on("beforeunload", function(){
 		// Clear pin and pid
-		$.get("/leave_game.txt?pin=" + pin + "&pid=" + pid, function(data){});
-		window.localStorage.removeItem("pin");
-		window.localStorage.removeItem("pid");
+		$.get({
+			url: "/leave_game.txt?pin=" + pin + "&pid=" + pid,
+			success: function(data){
+				window.localStorage.removeItem("pin");
+				window.localStorage.removeItem("pid");
+			},
+			async: false
+		});
 	});
 
 	slickReload();
