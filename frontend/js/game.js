@@ -90,7 +90,6 @@ function removeHand(s){
 
 // Called every so often
 function update(){
-	console.log("Update called!");
 	$.get("/get_dealt.txt?pin=" + pin, function(data){
 		if(data.trim() !== "INVALID"){
 			var ds = data.split("\n");
@@ -111,8 +110,8 @@ function update(){
 				}
 			}
 		}
-	});
 
+	// Only do it after all this so we don't leave connections open
 	$.get("/get_field.txt?pin=" + pin, function(data){
 		if(data.trim() !== "INVALID"){
 			var ds = data.split("\n");
@@ -133,7 +132,6 @@ function update(){
 				}
 			}
 		}
-	});
 
 	$.get(encodeURI("/get_hand.txt?pin=" + pin + "&pid=" + pid), function(data){
 		if(data.trim() !== "INVALID"){
@@ -155,7 +153,6 @@ function update(){
 				}
 			}
 		}
-	});
 
 	$.get(encodeURI("/get_card_czar.txt?pin=" + pin), function(data){
 		if(data.trim() === pid){
@@ -195,7 +192,6 @@ function update(){
 			}
 			cardCzar = false;
 		}
-	});
 
 	$.get(encodeURI("/get_score.txt?pin=" + pin + "&pid=" + pid), function(data){
 		if(data !== "INVALID"){
@@ -221,7 +217,6 @@ function update(){
 				});
 			}
 		}
-	});
 
 	$.get("/get_leaderboard.txt?pin=" + pin, function(data){
 		if(data !== "INVALID"){
@@ -238,7 +233,7 @@ function update(){
 				$("#"+i).append("<td>" + scoreStrs[i].split(",")[1] + "</td>");
 			}
 		}
-	});
+	})})})})})});
 }
 
 $(document).ready(function(){
