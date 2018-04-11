@@ -21,4 +21,6 @@ elif [[ $1 == "down" ]]; then
 	echo "Stopping server"
 	sudo killall java
 	echo "Stopped server"
+else
+	echo "Illegal argument: $1"
 fi
