@@ -86,9 +86,9 @@ public class Server {
 				System.out.println(req);
 				handleRequest(req);
 				out.flush();
-
-				System.out.println("Closing connection to " + conn.getRemoteSocketAddress());
+				
 				conn.close();
+				System.out.println("Closed connection to " + conn.getRemoteSocketAddress());
 			} catch (IOException e){
 				e.printStackTrace();
 			}
