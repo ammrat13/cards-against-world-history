@@ -11,6 +11,7 @@ var cardCzar = false;
 
 var leader = false;
 var slickInited = false;
+var updating = false; // So we don't update while we are updating
 
 function slickReload(){
 	// Unslick if we have slicked already
@@ -90,6 +91,7 @@ function removeHand(s){
 
 // Called every so often
 function update(){
+	updating = true;
 	$.get("/get_dealt.txt?pin=" + pin, function(data){
 		if(data.trim() !== "INVALID"){
 			var ds = data.split("\n");
@@ -233,6 +235,8 @@ function update(){
 				$("#"+i).append("<td>" + scoreStrs[i].split(",")[1] + "</td>");
 			}
 		}
+
+		updating = false;
 	})})})})})});
 }
 
@@ -304,5 +308,5 @@ $(document).ready(function(){
 	});
 
 	update();
-	setInterval(update, 2000);
+	setInterval(function(){if(!updating){update();}}, 2000);
 });
