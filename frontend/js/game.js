@@ -254,7 +254,7 @@ function update(){
 			error: function(){}
 		});
 		updating = false;
-	})})})})})});
+	})})})})})})});
 }
 
 $(document).ready(function(){
