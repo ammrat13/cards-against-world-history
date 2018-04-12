@@ -269,7 +269,7 @@ $(document).ready(function(){
 				window.localStorage.removeItem("pid");
 			},
 			timeout: 0,
-			error: function(){}
+			error: function(){},
 			async: false
 		});
 	});
