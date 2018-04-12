@@ -92,6 +92,15 @@ function removeHand(s){
 // Called every so often
 function update(){
 	updating = true;
+
+	// Make sure we can timeout
+	$.ajaxSetup({
+		timeout: 500,
+		error: function(){
+			updating = false;
+		}
+	});
+
 	$.get("/get_dealt.txt?pin=" + pin, function(data){
 		if(data.trim() !== "INVALID"){
 			var ds = data.split("\n");
@@ -236,6 +245,11 @@ function update(){
 			}
 		}
 
+		// Reset
+		$.ajaxSetup({
+			timeout: 0,
+			error: function(){}
+		});
 		updating = false;
 	})})})})})});
 }
