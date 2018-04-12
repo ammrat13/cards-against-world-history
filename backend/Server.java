@@ -84,12 +84,12 @@ public class Server {
 				// We only need the first line without the GET or the HTTP/1.1
 				Request req = new Request(in.readLine().split(" ")[1]);
 				System.out.println(req);
-				Thread.sleep(50);
+				Thread.sleep(100);	// This appears to help
 				handleRequest(req);
 				out.flush();
 				
 				conn.close();
-				System.out.println("Closed connection to " + conn.getRemoteSocketAddress());
+				System.out.println("Closed connection to " + conn.getRemoteSocketAddress() + " for " + req.page);
 			} catch (IOException | InterruptedException e){
 				e.printStackTrace();
 			}
