@@ -284,7 +284,7 @@ public class Server {
 
 			// Get Score
 			if(req.page.equals("/get_score.txt")){
-				if(games.get(req.params.get("pin")) != null){
+				if(games.get(req.params.get("pin")) != null && games.get(req.params.get("pin")).pids.indexOf(req.params.get("pid")) != -1){
 					out.print(games.get(req.params.get("pin")).playerScores.get(games.get(req.params.get("pin")).pids.indexOf(req.params.get("pid"))));
 				} else {
 					out.print("INVALID");
