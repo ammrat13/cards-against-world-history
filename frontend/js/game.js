@@ -95,7 +95,7 @@ function update(){
 
 	// Make sure we can timeout
 	$.ajaxSetup({
-		timeout: 500,
+		timeout: 1000,
 		error: function(){
 			updating = false;
 		}
@@ -268,6 +268,8 @@ $(document).ready(function(){
 				window.localStorage.removeItem("pin");
 				window.localStorage.removeItem("pid");
 			},
+			timeout: 0,
+			error: function(){}
 			async: false
 		});
 	});
