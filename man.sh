@@ -19,7 +19,7 @@ elif [[ $1 == "start" ]]; then
 	fi
 elif [[ $1 == "stop" ]]; then
 	# Check if we already have it down
-	if pgrep -x "java" > /dev/null; then
+	if ! pgrep -x "java" > /dev/null; then
 		echo "Server is already stopped"
 	else
 		echo "Stopping server..."
