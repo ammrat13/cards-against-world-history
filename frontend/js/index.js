@@ -33,6 +33,7 @@ function createPid(g){
 			$("#create-go").removeClass("disabled");
 			$("#create-go").prop("disabled", false);
 			$("#create-pin").prop("disabled", false);
+			$("#create-pid").prop("disabled", false);
 			window.localStorage.removeItem("pin");
 		}
 	});
@@ -55,6 +56,7 @@ function joinPinAndPid(pin, g){
 				$("#join-go").prop("disabled", false);
 				$("#join-pin").prop("disabled", false);
 				$("#join-pin").addClass("is-invalid");
+				$("#join-pid").prop("disabled", false);
 			}
 		});
 	});
@@ -91,8 +93,14 @@ $(document).ready(function(){
 			$("#join-go").addClass("disabled");
 			$("#join-go").prop("disabled", true);
 			$("#join-pin").prop("disabled", true);
+			$("#join-pid").prop("disabled", true);
 			joinPinAndPid($("#join-pin").val(), true);
+		// If it failed, how did it fail?
+		} else if(!verifyPid($("#join-pid").val())) {
+			$("#join-pin").removeClass("is-invalid");
+			$("#join-pid").addClass("is-invalid");
 		} else {
+			$("#join-pid").removeClass("is-invalid");
 			$("#join-pin").addClass("is-invalid");
 		}
 	});
@@ -123,6 +131,7 @@ $(document).ready(function(){
 			$("#create-go").addClass("disabled");
 			$("#create-go").prop("disabled", true);
 			$("#create-pin").prop("disabled", true);
+			$("#create-pid").prop("disabled", true);
 			createPid(true);
 		} else {
 			$("#create-pid").addClass("is-invalid");
