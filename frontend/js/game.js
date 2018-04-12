@@ -101,6 +101,10 @@ function update(){
 		}
 	});
 
+	// Make sure we ping
+	$.get(encodeURI("/ping.txt?pin=" + pin + "&pid=" + pid), function(data){
+	
+	// Only do it after all this so we don't leave connections open
 	$.get("/get_dealt.txt?pin=" + pin, function(data){
 		if(data.trim() !== "INVALID"){
 			var ds = data.split("\n");
@@ -122,7 +126,6 @@ function update(){
 			}
 		}
 
-	// Only do it after all this so we don't leave connections open
 	$.get("/get_field.txt?pin=" + pin, function(data){
 		if(data.trim() !== "INVALID"){
 			var ds = data.split("\n");
