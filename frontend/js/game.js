@@ -32,20 +32,6 @@ function slickReload(){
 	});
 }
 
-function leave(){
-	// Clear pin and pid
-	$.get({
-		url: "/leave_game.txt?pin=" + pin + "&pid=" + pid,
-		success: function(data){
-			window.localStorage.removeItem("pin");
-			window.localStorage.removeItem("pid");
-		},
-		timeout: 0,
-		error: function(){},
-		async: false
-	});
-}
-
 function addDealt(s){
 	$("#dealt-card-carousel").slick("slickAdd",
 		'<div class="game-card card bg-dark text-white"><h5><b>' + s + '</b></h5>'
@@ -117,9 +103,11 @@ function update(){
 
 	// Make sure we ping
 	$.get(encodeURI("/ping.txt?pin=" + pin + "&pid=" + pid), function(data){
-		// If the ping failed, something has gone wrong
+		// If the ping failed, something has gone wrong. Leave
 		if(data.trim() !== "PONG"){
-			leave();
+			window.localStorage.removeItem("pin");
+			window.localStorage.removeItem("pid");
+			window.location.href = "index.html";
 		}
 
 	// Only do it after all this so we don't leave connections open
@@ -282,7 +270,17 @@ $(document).ready(function(){
 
 	// Handle everything if the user goes away
 	$(window).on("beforeunload unload", function(){
-		leave();
+		// Clear pin and pid
+		$.get({
+			url: "/leave_game.txt?pin=" + pin + "&pid=" + pid,
+			success: function(data){
+				window.localStorage.removeItem("pin");
+				window.localStorage.removeItem("pid");
+			},
+			timeout: 0,
+			error: function(){},
+			async: false
+		});
 	});
 
 	slickReload();
