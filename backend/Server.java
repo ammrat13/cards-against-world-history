@@ -84,6 +84,7 @@ public class Server {
 				// We only need the first line without the GET or the HTTP/1.1
 				Request req = new Request(in.readLine().split(" ")[1]);
 				System.out.println(req);
+				Thread.sleep(50);
 				handleRequest(req);
 				out.flush();
 				
