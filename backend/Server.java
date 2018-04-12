@@ -173,10 +173,12 @@ public class Server {
 			// Ping a game
 			if(req.page.equals("/ping.txt")){
 				if(games.get(req.params.get("pin")) != null){
-					games.get(req.params.get("pin")).ping(req.params.get("pid"));
-					out.println("DONE");
+					if(games.get(req.params.get("pin")).ping(req.params.get("pid")))
+						out.println("PONG");
+					else
+						out.println("INVALID");
 				} else {
-					out.println("FAIL");
+					out.println("INVALID");
 				}
 			}
 

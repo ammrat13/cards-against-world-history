@@ -32,6 +32,20 @@ function slickReload(){
 	});
 }
 
+function leave(){
+	// Clear pin and pid
+	$.get({
+		url: "/leave_game.txt?pin=" + pin + "&pid=" + pid,
+		success: function(data){
+			window.localStorage.removeItem("pin");
+			window.localStorage.removeItem("pid");
+		},
+		timeout: 0,
+		error: function(){},
+		async: false
+	});
+}
+
 function addDealt(s){
 	$("#dealt-card-carousel").slick("slickAdd",
 		'<div class="game-card card bg-dark text-white"><h5><b>' + s + '</b></h5>'
@@ -103,7 +117,11 @@ function update(){
 
 	// Make sure we ping
 	$.get(encodeURI("/ping.txt?pin=" + pin + "&pid=" + pid), function(data){
-	
+		// If the ping failed, something has gone wrong
+		if(data.trim() !== "PONG"){
+			leave();
+		}
+
 	// Only do it after all this so we don't leave connections open
 	$.get("/get_dealt.txt?pin=" + pin, function(data){
 		if(data.trim() !== "INVALID"){
@@ -264,17 +282,7 @@ $(document).ready(function(){
 
 	// Handle everything if the user goes away
 	$(window).on("beforeunload unload", function(){
-		// Clear pin and pid
-		$.get({
-			url: "/leave_game.txt?pin=" + pin + "&pid=" + pid,
-			success: function(data){
-				window.localStorage.removeItem("pin");
-				window.localStorage.removeItem("pid");
-			},
-			timeout: 0,
-			error: function(){},
-			async: false
-		});
+		leave();
 	});
 
 	slickReload();

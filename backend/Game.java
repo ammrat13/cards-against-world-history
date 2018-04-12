@@ -48,9 +48,12 @@ public class Game {
 		dealBlack();
 	}
 
-	public void ping(String p){
-		if(pids.indexOf(p) != -1)
-			playerTimeouts.set(pids.indexOf(p), System.currentTimeMillis());
+	public boolean ping(String p){
+		if(pids.indexOf(p) == -1)
+			return false;
+			
+		playerTimeouts.set(pids.indexOf(p), System.currentTimeMillis());
+		return true;
 	}
 
 	public void prune(){
