@@ -55,7 +55,7 @@ public class Game {
 
 	public void prune(){
 		for(int i=0; i<pids.size(); i++){
-			if(System.currentTimeMillis() - playerTimeouts.get(i) >= 10000)
+			if(System.currentTimeMillis() - playerTimeouts.get(i) >= 20*1000)
 				leave(pids.get(i));
 		}
 	}
