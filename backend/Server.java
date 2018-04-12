@@ -90,7 +90,7 @@ public class Server {
 				
 				conn.close();
 				System.out.println("Closed connection to " + conn.getRemoteSocketAddress());
-			} catch (IOException e){
+			} catch (IOException | InterruptedException e){
 				e.printStackTrace();
 			}
 		}
