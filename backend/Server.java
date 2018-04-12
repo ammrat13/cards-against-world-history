@@ -106,7 +106,7 @@ public class Server {
 			||	Arrays.asList(specFiles).contains(req.page)){
 				out.println("HTTP/1.1 200 OK");
 				out.println("Connection: close");
-				out.println("Cache-Control: no-cache");
+				out.println("Cache-Control: no-cache, no-store");
 
 				// MIME Type
 				if(Arrays.asList(files).contains(req.page)){
