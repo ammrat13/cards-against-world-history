@@ -9,19 +9,25 @@ elif [[ $1 == "start" ]]; then
 	# Check if we already have it up
 	wget -q --spider localhost
 	if [[ $? -eq 0 ]]; then
-		echo "Server is already up"
+		echo "Server is already started"
 	else
-		echo "Starting server"
+		echo "Starting server..."
 		cd backend
 		javac Server.java && sudo bash -c 'java Server > /dev/null &'
 		cd ..
 		echo "Started server"
 	fi
 elif [[ $1 == "stop" ]]; then
-	echo "Stopping server"
-	sudo killall java
-	echo "Stopped server"
+	# Check if we already have it down
+	if pgrep -x "java" > /dev/null; then
+		echo "Server is already stopped"
+	else
+		echo "Stopping server..."
+		sudo killall java
+		echo "Stopped server"
+	fi
 elif [[ $1 == "restart" ]]; then
+	# Call recursively
 	./$0 stop
 	./$0 start
 else
