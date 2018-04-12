@@ -93,14 +93,6 @@ function removeHand(s){
 function update(){
 	updating = true;
 
-	// Make sure we can timeout
-	$.ajaxSetup({
-		timeout: 1000,
-		error: function(){
-			updating = false;
-		}
-	});
-
 	// Make sure we ping
 	$.get(encodeURI("/ping.txt?pin=" + pin + "&pid=" + pid), function(data){
 		// If the ping failed, something has gone wrong. Leave
@@ -254,11 +246,6 @@ function update(){
 			}
 		}
 
-		// Reset
-		$.ajaxSetup({
-			timeout: 0,
-			error: function(){}
-		});
 		updating = false;
 	})})})})})})});
 }
@@ -278,7 +265,7 @@ $(document).ready(function(){
 				window.localStorage.removeItem("pid");
 			},
 			timeout: 0,
-			error: function(){},
+			error: function(xhr, ajaxOptions, thrownError){},
 			async: false
 		});
 	});
@@ -288,6 +275,15 @@ $(document).ready(function(){
 	// Slick needs this to work with tabs
 	$('a[data-toggle=tab]').on("shown.bs.tab", function(e){
 		slickReload();
+	});
+
+	// Make sure we can timeout
+	// Setup unless otherwise specified
+	$.ajaxSetup({
+		timeout: 1000,
+		error: function(xhr, ajaxOptions, thrownError){
+			updating = false;
+		}
 	});
 
 	$("#leader-btn").click(function(){
@@ -316,7 +312,11 @@ $(document).ready(function(){
 			$("#field-go").addClass("disabled");
 			$("#field-go").prop("disabled", true);
 			
-			$.get(encodeURI("/select_card.txt?pin=" + pin + "&card=" + current), function(data){});
+			$.get({
+				url: encodeURI("/select_card.txt?pin=" + pin + "&card=" + current),
+				success: function(data){},
+				error: function(xhr, ajaxOptions, thrownError){}
+			});
 		}
 	});
 
@@ -328,7 +328,11 @@ $(document).ready(function(){
 			$("#hand-go").addClass("disabled");
 			$("#hand-go").prop("disabled", true);
 			
-			$.get(encodeURI("/play_card.txt?pin=" + pin + "&pid=" + pid + "&card=" + current), function(data){});
+			$.get({
+				url: encodeURI("/play_card.txt?pin=" + pin + "&pid=" + pid + "&card=" + current),
+				success: function(data){},
+				error: function(xhr, ajaxOptions, thrownError){}
+			});
 		}
 	});
 
