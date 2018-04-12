@@ -260,7 +260,7 @@ $(document).ready(function(){
 	}
 
 	// Handle everything if the user goes away
-	window.onunload = window.onbeforeunload = function(){
+	$(window).on("beforeunload unload", function(){
 		// Clear pin and pid
 		$.get({
 			url: "/leave_game.txt?pin=" + pin + "&pid=" + pid,
@@ -272,7 +272,7 @@ $(document).ready(function(){
 			error: function(){},
 			async: false
 		});
-	};
+	});
 
 	slickReload();
 
