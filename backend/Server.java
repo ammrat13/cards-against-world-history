@@ -27,6 +27,7 @@ public class Server {
 	};
 	// The array of all special files
 	public final static String[] specFiles = {
+		"/ping.txt",
 		"/create_game.txt",
 		"/join_game.txt",
 		"/leave_game.txt",
@@ -102,6 +103,13 @@ public class Server {
 
 		public void handleRequest(Request req){
 
+			// Every time we get a request, prunce the games
+			for(String pin : games.keySet()){
+				games.get(pin).prune();
+				if(games.get(pin).cardCzar != -1 && games.get(pin).playerScores.size() == 0)
+					games.remove(pin);
+			}
+
 			// Headers
 			if(	Arrays.asList(files).contains(req.page)
 			||	Arrays.asList(imageFiles).contains(req.page)
@@ -161,6 +169,16 @@ public class Server {
 			}
 
 			// Special files and handling
+
+			// Ping a game
+			if(req.page.equals("/ping.txt")){
+				if(games.get(req.params.get("pin")) != null){
+					games.get(req.params.get("pin")).ping(req.params.get("pid"));
+					out.println("DONE");
+				} else {
+					out.println("FAIL");
+				}
+			}
 
 			// Create a game
 			if(req.page.equals("/create_game.txt")){

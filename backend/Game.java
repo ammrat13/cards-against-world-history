@@ -12,6 +12,7 @@ public class Game {
 	public ArrayList<String> pids;
 	public ArrayList<Integer> playerScores;
 	public ArrayList<ArrayList<String>> playerHands;
+	public ArrayList<Long> playerTimeouts;
 
 	public int cardCzar = -1;
 
@@ -42,14 +43,28 @@ public class Game {
 
 		playerScores = new ArrayList<Integer>();
 		playerHands = new ArrayList<ArrayList<String>>();
+		playerTimeouts = new ArrayList<Long>();
 
 		dealBlack();
+	}
+
+	public void ping(String p){
+		if(pids.indexOf(p) != -1)
+			playerTimeouts.set(pids.indexOf(p), System.currentTimeMillis());
+	}
+
+	public void prune(){
+		for(int i=0; i<pids.size(); i++){
+			if(System.currentTimeMillis() - playerTimeouts.get(i) >= 10000)
+				leave(pids.get(i));
+		}
 	}
 
 	public String join(String p){
 		if(playerScores.size()*10 + 10 <= WDECK.size() && p != null && !pids.contains(p)){
 			playerScores.add(0);
 			playerHands.add(new ArrayList<String>());
+			playerTimeouts.add(System.currentTimeMillis());
 			pids.add(p);
 			deal();
 
