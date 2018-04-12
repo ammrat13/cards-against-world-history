@@ -18,6 +18,7 @@ public class Server {
 		"/game.html",
 		"/js/index.js",
 		"/js/game.js",
+		"/js/bootstrap-notify.js",
 		"/css/style.css"
 	};
 	// The array of all the image files
