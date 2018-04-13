@@ -1,7 +1,7 @@
 var WHRatio = .85
 
-var pin = window.localStorage.getItem("pin");
-var pid = window.localStorage.getItem("pid");
+var pin = window.sessionStorage.getItem("pin");
+var pid = window.sessionStorage.getItem("pid");
 var oldDealt = [];
 var dealtCards = [];
 var fieldCards = [];
@@ -97,8 +97,9 @@ function update(){
 	$.get(encodeURI("/ping.txt?pin=" + pin + "&pid=" + pid), function(data){
 		// If the ping failed, something has gone wrong. Leave
 		if(data.trim() !== "PONG"){
-			window.localStorage.removeItem("pin");
-			window.localStorage.removeItem("pid");
+			window.sessionStorage.removeItem("pin");
+			window.sessionStorage.removeItem("pid");
+			window.sessionStorage.setItem("fail", "fail");
 			window.location.href = "index.html";
 		}
 
@@ -251,7 +252,7 @@ function update(){
 }
 
 $(document).ready(function(){
-	if(window.localStorage.getItem("pin") === null || window.localStorage.getItem("pin") === ""){
+	if(window.sessionStorage.getItem("pin") === null || window.sessionStorage.getItem("pin") === ""){
 		window.location.href = "index.html";
 	}
 
@@ -261,11 +262,14 @@ $(document).ready(function(){
 		$.get({
 			url: "/leave_game.txt?pin=" + pin + "&pid=" + pid,
 			success: function(data){
-				window.localStorage.removeItem("pin");
-				window.localStorage.removeItem("pid");
+				window.sessionStorage.removeItem("pin");
+				window.sessionStorage.removeItem("pid");
 			},
 			timeout: 3000,
-			error: function(xhr, ajaxOptions, thrownError){},
+			error: function(xhr, ajaxOptions, thrownError){
+				window.sessionStorage.removeItem("pin");
+				window.sessionStorage.removeItem("pid");
+			},
 			async: false
 		});
 	});

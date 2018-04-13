@@ -17,8 +17,8 @@ function verifyPid(pid){
 
 function createPin(){
 	$.get("/create_game.txt", function(data){
-		window.localStorage.setItem("pin", data.trim());
-		$("#create-pin").html(window.localStorage.getItem("pin"));
+		window.sessionStorage.setItem("pin", data.trim());
+		$("#create-pin").html(window.sessionStorage.getItem("pin"));
 		// Make sure we constantly ping
 		setInterval(function(){
 			if(!goToGame){
@@ -32,9 +32,9 @@ function createPin(){
 }
 
 function createPid(g){
-	$.get(encodeURI("/join_game.txt?pin=" + window.localStorage.getItem("pin") + "&pid=" + $("#create-pid").val()), function(data){
+	$.get(encodeURI("/join_game.txt?pin=" + window.sessionStorage.getItem("pin") + "&pid=" + $("#create-pid").val()), function(data){
 		if(data.trim() !== "INVALID"){
-			window.localStorage.setItem("pid", data.trim());
+			window.sessionStorage.setItem("pid", data.trim());
 			if(g){
 				goToGame = true;
 				go();
@@ -45,19 +45,19 @@ function createPid(g){
 			$("#create-go").prop("disabled", false);
 			$("#create-pin").prop("disabled", false);
 			$("#create-pid").prop("disabled", false);
-			window.localStorage.removeItem("pin");
+			window.sessionStorage.removeItem("pin");
 		}
 	});
 }
 
 function joinPinAndPid(pin, g){
 	// Leave the game we created for create
-	$.get(encodeURI("/leave_game.txt?pin=" + window.localStorage.getItem("pin")), function(data){
+	$.get(encodeURI("/leave_game.txt?pin=" + window.sessionStorage.getItem("pin")), function(data){
 		// We only need to check for pin as if it is present, pid is present
 		$.get(encodeURI("/join_game.txt?pin=" + pin + "&pid=" + $("#join-pid").val()), function(data){
 			if(data.trim() !== "INVALID"){
-				window.localStorage.setItem("pin", pin);
-				window.localStorage.setItem("pid", data.trim());
+				window.sessionStorage.setItem("pin", pin);
+				window.sessionStorage.setItem("pid", data.trim());
 				if(g){
 					goToGame = true;
 					go();
@@ -81,10 +81,10 @@ $(document).ready(function(){
 		// Clear pin and pid
 		if(!goToGame){
 			$.get({
-				url: encodeURI("/leave_game.txt?pin=" + window.localStorage.getItem("pin")),
+				url: encodeURI("/leave_game.txt?pin=" + window.sessionStorage.getItem("pin")),
 				success: function(data){
-					window.localStorage.removeItem("pin");
-					window.localStorage.removeItem("pid");
+					window.sessionStorage.removeItem("pin");
+					window.sessionStorage.removeItem("pid");
 				},
 				timeout: 3000,
 				error: function(xhr, ajaxOptions, thrownError){},
@@ -92,6 +92,26 @@ $(document).ready(function(){
 			});
 		}
 	});
+
+	if(window.sessionStorage.getItem("fail") === "fail"){
+		window.sessionStorage.removeItem("fail");
+		$.notify({
+			title: "<b>Disconnected: </b>",
+			message: "Something went wrong"
+		},{
+			type: "danger",
+			newest_on_top: true,
+			delay: 3000,
+			animate: {
+				enter: "animated fadeInDown",
+				exit: "animated fadeOutUp"
+			},
+			placement: {
+				from: "top",
+				align: "center"
+			}
+		});
+	}
 
 	$("#join-btn").click(function(){
 		if(!joinDrop){
