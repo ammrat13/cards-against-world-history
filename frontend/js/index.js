@@ -7,7 +7,7 @@ function go(){
 
 function verifyPin(pin){
 	// Pin is a 6 digit long string
-	return /^\d+$/.test(pin) && pin.length === 6;
+	return /^\d+$/.test(pin) && pin.length === 8;
 }
 
 function verifyPid(pid){
@@ -63,6 +63,22 @@ function joinPinAndPid(pin, g){
 }
 
 $(document).ready(function(){
+
+	// Handle everything if the user goes away
+	$(window).on("beforeunload unload", function(){
+		// Clear pin and pid
+		$.get({
+			url: encodeURI("/leave_game.txt?pin=" + window.localStorage.getItem("pin")),
+			success: function(data){
+				window.localStorage.removeItem("pin");
+				window.localStorage.removeItem("pid");
+			},
+			timeout: 3000,
+			error: function(xhr, ajaxOptions, thrownError){},
+			async: false
+		});
+	});
+
 	$("#join-btn").click(function(){
 		if(!joinDrop){
 			joinDrop = true;

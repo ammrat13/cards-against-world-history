@@ -98,7 +98,7 @@ public class Server {
 		}
 
 		public String genPin(){
-			return String.format("%06d", (int) (1000000*Math.random()));
+			return String.format("%08d", (int) (100000000*Math.random()));
 		}
 
 		public void handleRequest(Request req){
