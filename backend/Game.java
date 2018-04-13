@@ -13,6 +13,7 @@ public class Game {
 	public ArrayList<Integer> playerScores;
 	public ArrayList<ArrayList<String>> playerHands;
 	public ArrayList<Long> playerTimeouts;
+	public long gameTimeout;
 
 	public int cardCzar = -1;
 
@@ -44,11 +45,14 @@ public class Game {
 		playerScores = new ArrayList<Integer>();
 		playerHands = new ArrayList<ArrayList<String>>();
 		playerTimeouts = new ArrayList<Long>();
+		gameTimeout = System.currentTimeMillis();
 
 		dealBlack();
 	}
 
 	public boolean ping(String p){
+		gameTimeout = System.currentTimeMillis();
+
 		if(pids.indexOf(p) == -1)
 			return false;
 			

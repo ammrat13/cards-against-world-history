@@ -106,7 +106,9 @@ public class Server {
 			// Every time we get a request, prune the games
 			for(String pin : games.keySet()){
 				games.get(pin).prune();
-				if(games.get(pin).cardCzar != -1 && games.get(pin).playerScores.size() == 0)
+				if(System.currentTimeMillis() - games.get(pin).gameTimeout > 60*1000)
+					games.remove(pin);
+				else if(games.get(pin).cardCzar != -1 && games.get(pin).playerScores.size() == 0)
 					games.remove(pin);
 			}
 			System.out.println("Games: " + games);
@@ -177,7 +179,7 @@ public class Server {
 					if(games.get(req.params.get("pin")).ping(req.params.get("pid")))
 						out.println("PONG");
 					else
-						out.println("INVALID");
+						out.println("INVALID_PID");
 				} else {
 					out.println("INVALID");
 				}
