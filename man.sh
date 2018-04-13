@@ -13,7 +13,7 @@ elif [[ $1 == "start" ]]; then
 	else
 		echo "Starting server..."
 		cd backend
-		javac Server.java && sudo bash -c 'java Server > /dev/null &'
+		javac Server.java && sudo bash -c 'java Server >> ../log.txt &'
 		cd ..
 		echo "Started server"
 	fi
