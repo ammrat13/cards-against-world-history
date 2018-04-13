@@ -103,12 +103,13 @@ public class Server {
 
 		public void handleRequest(Request req){
 
-			// Every time we get a request, prunce the games
+			// Every time we get a request, prune the games
 			for(String pin : games.keySet()){
 				games.get(pin).prune();
 				if(games.get(pin).cardCzar != -1 && games.get(pin).playerScores.size() == 0)
 					games.remove(pin);
 			}
+			System.out.println("Games: " + games);
 
 			// Headers
 			if(	Arrays.asList(files).contains(req.page)
