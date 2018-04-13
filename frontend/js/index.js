@@ -1,5 +1,6 @@
 var joinDrop = false;
 var createDrop = false;
+var goToGame = false;
 
 function go(){
 	window.location.href = "game.html";
@@ -26,6 +27,7 @@ function createPid(g){
 		if(data.trim() !== "INVALID"){
 			window.localStorage.setItem("pid", data.trim());
 			if(g){
+				goToGame = true;
 				go();
 			}
 		} else {
@@ -48,6 +50,7 @@ function joinPinAndPid(pin, g){
 				window.localStorage.setItem("pin", pin);
 				window.localStorage.setItem("pid", data.trim());
 				if(g){
+					goToGame = true;
 					go();
 				}
 			} else {
@@ -67,16 +70,18 @@ $(document).ready(function(){
 	// Handle everything if the user goes away
 	$(window).on("beforeunload unload", function(){
 		// Clear pin and pid
-		$.get({
-			url: encodeURI("/leave_game.txt?pin=" + window.localStorage.getItem("pin")),
-			success: function(data){
-				window.localStorage.removeItem("pin");
-				window.localStorage.removeItem("pid");
-			},
-			timeout: 3000,
-			error: function(xhr, ajaxOptions, thrownError){},
-			async: false
-		});
+		if(!goToGame){
+			$.get({
+				url: encodeURI("/leave_game.txt?pin=" + window.localStorage.getItem("pin")),
+				success: function(data){
+					window.localStorage.removeItem("pin");
+					window.localStorage.removeItem("pid");
+				},
+				timeout: 3000,
+				error: function(xhr, ajaxOptions, thrownError){},
+				async: false
+			});
+		}
 	});
 
 	$("#join-btn").click(function(){
