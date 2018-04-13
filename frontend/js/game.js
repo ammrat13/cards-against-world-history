@@ -264,7 +264,7 @@ $(document).ready(function(){
 				window.localStorage.removeItem("pin");
 				window.localStorage.removeItem("pid");
 			},
-			timeout: 0,
+			timeout: 3000,
 			error: function(xhr, ajaxOptions, thrownError){},
 			async: false
 		});
