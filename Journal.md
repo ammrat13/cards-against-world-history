@@ -1,4 +1,5 @@
 # Journal
+**4/13/2018:** Added ping system\
 **4/12/2018:** Deployed\
 **4/10/2018:** Changed file names and did `robots.txt`\
 **4/9/2018:** Did networking\
