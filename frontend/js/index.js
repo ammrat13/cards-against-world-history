@@ -20,14 +20,14 @@ function createPin(){
 		window.localStorage.setItem("pin", data.trim());
 		$("#create-pin").html(window.localStorage.getItem("pin"));
 		// Make sure we constantly ping
-		setTimeout(function(){
+		setInterval(function(){
 			if(!goToGame){
 				$.get({
-					url: "ping.txt?pin=" + $("#create-pin").html(window.localStorage.getItem("pin")),
-					timeout: 2500
+					url: "ping.txt?pin=" + $("#create-pin").html(),
+					timeout: 1900
 				});
 			}
-		}, 3000);
+		}, 2000);
 	});
 }
 
