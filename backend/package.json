@@ -1,0 +1,23 @@
+{
+  "name": "cards-against-world-history",
+  "version": "0.0.0",
+  "description": "A web-based interface for Cards Against World History.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ammrat13/cards-against-world-history.git"
+  },
+  "author": "Ammar Ratnani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ammrat13/cards-against-world-history/issues"
+  },
+  "homepage": "https://github.com/ammrat13/cards-against-world-history#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "nodemon": "^1.17.5"
+  }
+}
