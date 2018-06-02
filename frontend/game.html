@@ -26,41 +26,27 @@
 	<body>
 		<div class="text-center section">
 			<h1><b>Cards Against World History</b></h1>
+			<h2>Room: <span id="room-name">Loading...</span></h2>
 		</div>
-		<div class="text-center text-white bg-black section">
-			<h2><b>Join Game:</b></h2>
+		<div class="text-white text-justify bg-black section">
 			<div class="container">
-				<form>
-					<div class="form-group">
-						<label for="room-name">Room Name:</label>
-						<input id="room-name" type="text" class="form-control"></input>
-					</div>
-					<div class="form-group">
-						<label for="player-name">Your Name:</label>
-						<input id="player-name" type="text" class="form-control"></input>
-						<small id="player-nameHelpBlock" class="form-text text-danger initially-hidden">
-							This name is already taken.
-						</small>
-					</div>
-					<button id="join-btn" type="submit" class="btn btn-block btn-success">Join</button>
-				</form>
+				<h2><b id="prompt">Loading...</b></h2>
 			</div>
 		</div>
-		<div class="text-center text-white bg-black section">
-			<h3>Players:</h3>
-			<div id="player-listing" class="container scrollbox">
+		<div id="card-czar-alert" class="section">
+			<div class="container alert alert-success text-center">
+				<b>You are the Card Czar</b>
+			</div>
+		</div>
+		<div class="section">
+			<div id="cards" class="container text-justify">
+				
+			</div>
+		</div>
+		<div class="text-center section">
+			<h3>Leaderboard:</h3>
+			<div id="leaderboard" class="container scrollbox">
 				Loading...
 			</div>
 		</div>
-		<div class="container section">
-			<h2>How to Play</h2>
-			<p class="text-justify">
-				To begin, enter the name of the room you wish to join and a username, then click "Join". In the room, one player will be the Card Czar. Every player except the Card Czar will select the best response (white card) to the prompt (black card) given. The Card Czar will then select the best response out of the ones played, and the player who put down the card will recieve one point. Another player then becomes the Card Czar. Play continues in this manner indefinitely. 
-			</p>
-			<h2>Contact</h2>
-			<p class="text-justify">
-				For help or to report a bug, please contact either <a class="text-secondary" href="https://github.com/ammrat13">Ammar Ratnani (Webmaster)</a> or <a class="text-secondary" href="https://www.fortbendisd.com/Page/18389">Mrs. Jennifer Craddock (Sponsor)</a>.
-			</p>
-		</div>
-	</body>
 </html>

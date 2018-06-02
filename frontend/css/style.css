@@ -3,6 +3,20 @@ body {
 	background-color: #ffffff;
 }
 
+input {
+	font-weight: bold;
+	text-align: center;
+}
+
+/*
+	Change the blue glow around text areas to gray
+	From https://gist.github.com/eriteric/4eaf0d89854268c8330f#file-css-override-css
+*/
+.form-control:focus {
+	border-color: #6c757d;
+	box-shadow: inset 0 1px 1px rgba(108, 117, 125, 0.075), 0 0 20px rgba(108, 117, 125, 0.6);
+}
+
 .bg-black {
 	background-color: #000000;
 }
@@ -12,4 +26,21 @@ body {
 	padding-bottom: 1em;
 	padding-left: 2em;
 	padding-right: 2em;
+}
+
+.scrollbox {
+	overflow-y: auto;
+	max-height: 40vh;
+}
+
+.initially-hidden {
+	display: none;
+}
+
+#cards {
+	padding-top: 1em;
+}
+
+#card-czar-alert {
+	padding-bottom: 0em;
 }
