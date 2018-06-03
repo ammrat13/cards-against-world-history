@@ -37,6 +37,25 @@ input {
 	display: none;
 }
 
+.player-card {
+	margin-left: 1em;
+	margin-right: 1em;
+	margin-top: .5em;
+	margin-bottom: .5em;
+	
+	width: 100%;
+}
+
+.player-card-container {
+	/*
+		Vertical Centering
+		From https://stackoverflow.com/questions/20547819/vertical-align-with-bootstrap-3?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+	*/
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #cards {
 	padding-top: 1em;
 }

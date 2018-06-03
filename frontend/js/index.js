@@ -26,6 +26,21 @@ function updatePlayerList(roomN){
 }
 
 $(document).ready(function(){
+	// Check if a ping failed
+	if(new URL(window.location.href).searchParams.get("ping_fail") === "true"){
+		$.notify({
+			title: "<b>Error:</b>",
+			message: "Something went wrong"
+		},{
+			type: "danger",
+			placement: {
+				from: "top",
+				align: "center"
+			},
+			newest_on_top: true
+		});
+	}
+
 	setInterval(function(){
 		updatePlayerList($("#room-name").val());
 	}, 3000)
@@ -45,39 +60,59 @@ $(document).ready(function(){
 	});
 
 	$("#player-name").on("input", function(){
-		$.post("/is_name_taken", {rN: $("#room-name").val(), pN: $("#player-name").val()}, function(data){
-			if(data === "true"){
-				$("#player-name").addClass("is-invalid");
-				$("#player-nameHelpBlock").show();
-			} else {
-				$("#player-name").removeClass("is-invalid");
-				$("#player-nameHelpBlock").hide();
-			}
-		});
+		if($("#player-name").val() === ""){
+			$("#player-name").addClass("is-invalid");
+			$("#player-nameHelpBlock").show();
+			$("#player-nameHelpBlock").html("You must enter a name.");
+		} else {
+			$("#player-name").removeClass("is-invalid");
+			$("#player-nameHelpBlock").hide();
+			$.post("/is_name_taken", {rN: $("#room-name").val(), pN: $("#player-name").val()}, function(data){
+				if(data === "true"){
+					$("#player-name").addClass("is-invalid");
+					$("#player-nameHelpBlock").show();
+					$("#player-nameHelpBlock").html("This name is already taken.");
+				} else {
+					$("#player-name").removeClass("is-invalid");
+					$("#player-nameHelpBlock").hide();
+				}
+			});
+		}
 	});
 
 	$("#join-form").submit(function(e){
-		// TODO: Add protection for empty name
-		let rNTemp = $("#room-name").val();
-		let pNTemp = $("#player-name").val();
-
-		$("#join-btn").html("Loading...");
-		$("#join-btn").prop("disabled", true);
-		$("#room-name").prop("disabled", true);
-		$("#player-name").prop("disabled", true);
-
-		$.post("/join", {rN: rNTemp, pN: pNTemp}, function(data){
-			if(data === "Fail"){
-				// TODO: Add alert for fail
-				$("#join-btn").html("Join");
-				$("#join-btn").prop("disabled", false);
-				$("#room-name").prop("disabled", false);
-				$("#player-name").prop("disabled", false);
-			} else if(data === "Done"){
-				window.location.href = "game.html?rN=" + rNTemp + "&pN=" + pNTemp;
-			}
-		});
-
 		e.preventDefault();
+
+		if($("#player-name").val() !== ""){
+			let rNTemp = $("#room-name").val();
+			let pNTemp = $("#player-name").val();
+
+			$("#join-btn").html("Loading...");
+			$("#join-btn").prop("disabled", true);
+			$("#room-name").prop("disabled", true);
+			$("#player-name").prop("disabled", true);
+
+			$.post("/join", {rN: rNTemp, pN: pNTemp}, function(data){
+				if(data === "Fail"){
+					$.notify({
+						title: "<b>Error:</b>",
+						message: "Something went wrong"
+					},{
+						type: "danger",
+						placement: {
+							from: "top",
+							align: "center"
+						},
+						newest_on_top: true
+					});
+					$("#join-btn").html("Join");
+					$("#join-btn").prop("disabled", false);
+					$("#room-name").prop("disabled", false);
+					$("#player-name").prop("disabled", false);
+				} else if(data === "Done"){
+					window.location.href = "game.html?rN=" + rNTemp + "&pN=" + pNTemp;
+				}
+			});
+		}
 	});
 });

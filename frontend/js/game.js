@@ -29,7 +29,7 @@ function update(){
 		url: "/get_b_card",
 		data: {rN: roomN},
 		success: function(data){
-			$("#prompt").html(data);
+			data !== "" ? $("#prompt").html(data) : errorOut();
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			errorOut();
@@ -38,6 +38,7 @@ function update(){
 	});
 
 	// Card Czar
+	// Must come before hand as there is different handling
 	$.ajax({
 		method: "POST",
 		url: "/get_card_czar",
@@ -56,6 +57,98 @@ function update(){
 		},
 		timeout: 3000
 	});
+
+	// Hand
+	$.ajax({
+		method: "POST",
+		url: "/get_player_hand",
+		data: {rN: roomN, pN: playerN},
+		success: function(data){
+			// Website gives `data` as an array with cards
+			if(!isCardCzar){
+				$("#cards").html("");
+				for(let i=0; i<data.length; i+=3){
+					$("#cards").html($("#cards").html() + 
+						"<div class=\"row\">" + 
+							"<div class=\"col-md player-card-container\">" + 
+								(data[i] === undefined ? "" : "<div class=\"card player-card\"><div class=\"card-body\">" + data[i] + "</div></div>") +
+							"</div>" +
+							"<div class=\"col-md player-card-container\">" + 
+								(data[i+1] === undefined ? "" : "<div class=\"card player-card\"><div class=\"card-body\">" + data[i+1] + "</div></div>") +
+							"</div>" +
+							"<div class=\"col-md player-card-container\">" + 
+								(data[i+2] === undefined ? "" : "<div class=\"card player-card\"><div class=\"card-body\">" + data[i+2] + "</div></div>") +
+							"</div>" +
+						"</div>"
+					);
+				}
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			errorOut();
+		},
+		timeout: 3000
+	});
+
+	//Field if card czar
+	$.ajax({
+		method: "POST",
+		url: "/get_field",
+		data: {rN: roomN},
+		success: function(data){
+			// Website gives `data` as an array with cards
+			if(isCardCzar){
+				$("#cards").html("");
+				for(let i=0; i<data.length; i+=3){
+					$("#cards").html($("#cards").html() + 
+						"<div class=\"row\">" + 
+							"<div class=\"col-md player-card-container\">" + 
+								(data[i] === undefined ? "" : "<div class=\"card player-card\"><div class=\"card-body\">" + data[i] + "</div></div>") +
+							"</div>" +
+							"<div class=\"col-md player-card-container\">" + 
+								(data[i+1] === undefined ? "" : "<div class=\"card player-card\"><div class=\"card-body\">" + data[i+1] + "</div></div>") +
+							"</div>" +
+							"<div class=\"col-md player-card-container\">" + 
+								(data[i+2] === undefined ? "" : "<div class=\"card player-card\"><div class=\"card-body\">" + data[i+2] + "</div></div>") +
+							"</div>" +
+						"</div>"
+					);
+				}
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			errorOut();
+		},
+		timeout: 3000
+	});
+
+	// Leaderboard
+	$.ajax({
+		method: "POST",
+		url: "/get_leaderboard",
+		data: {rN: roomN},
+		success: function(data){
+			if(data === ""){
+				errorOut();
+			}
+
+			$("#leaderboard").html("");
+			for(let i=0; i<data.length; i++){
+				$("#leaderboard").html($("#leaderboard").html() + 
+					"<tr>" +
+						"<th style=\"width: 20%\" scope=\"col\">" + (i+1) + "</th>" +
+						"<th scope=\"col\">" + data[i].nam + "</th>" + 
+						"<th scope=\"col\">" + data[i].score + "</th>" +
+					"</tr>"
+				);
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			errorOut();
+		},
+		timeout: 3000
+	});
+
 }
 
 $(document).ready(function(){

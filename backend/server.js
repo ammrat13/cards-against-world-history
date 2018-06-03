@@ -24,7 +24,7 @@ const shuffle = require('shuffle-array');
 const PORT = 80;
 
 // How quickly to timeout a user (ms)
-const T_OUT = 60*1000;
+const T_OUT = 30*1000;
 
 // How many cards each player gets
 const CARDS_PER_PLAYER = 10;
@@ -92,9 +92,18 @@ class Game {
 		return bcards[Math.floor(Math.random() * bcards.length)];
 	}
 
-	pingPlayer(p_nam){
+	getPlayerHand(pNam){
 		for(let i=0; i<this.players.length; i++){
-			if(this.players[i].nam === p_nam){
+			if(this.players[i].nam === pNam){
+				return this.players[i].hand;
+			}
+		}
+		return null;
+	}
+
+	pingPlayer(pNam){
+		for(let i=0; i<this.players.length; i++){
+			if(this.players[i].nam === pNam){
 				this.players[i].ping();
 				return true;
 			}
@@ -105,8 +114,7 @@ class Game {
 	prune(){
 		for(let i=0; i<this.players.length; i++){
 			if(this.players[i].hasTimedOut()){
-				this.players.splice(i, 1);
-				i--;
+				this.leave(i);
 			}
 		}
 	}
@@ -142,12 +150,32 @@ class Game {
 		}
 	}
 
+	leave(p){
+		let idx = 0;
+		let pNam = "";
+		if(typeof p === "string"){
+			for(let i=0; i<this.players.length; i++){
+				if(this.players[i].nam === p){
+					pNam = p;
+					idx = i;
+					break;
+				}
+			}
+		} else if(typeof p === "number" && this.players[p] !== undefined){
+			pNam = this.players[p].nam;
+			idx = p;
+		}
+
+		this.players.splice(idx, 1);
+		delete this.field[pNam];
+	}
+
 	isFull(){
 		return CARDS_PER_PLAYER > this.wdeck.length;
 	}
 
-	isNameTaken(p_nam){
-		return this.players.filter((p) => p.nam == p_nam).length !== 0
+	isNameTaken(pNam){
+		return this.players.filter((p) => p.nam == pNam).length !== 0
 	}
 }
 
@@ -233,13 +261,35 @@ app.post("/get_b_card", function(req, res){
 	if(games[req.body.rN] !== undefined){
 		res.send(games[req.body.rN].bcard);
 	} else {
-		res.send("Fail");
+		res.send("");
+	}
+});
+
+app.post("/get_player_hand", function(req, res){
+	res.send(games[req.body.rN].getPlayerHand(req.body.pN));
+});
+
+app.post("/get_field", function(req, res){
+	if(games[req.body.rN] !== undefined){
+		res.send(games[req.body.rN].field);
+	} else {
+		res.send("");
 	}
 });
 
 app.post("/get_card_czar", function(req, res){
 	if(games[req.body.rN] !== undefined){
 		res.send(games[req.body.rN].getCardCzar());
+	} else {
+		res.send("");
+	}
+});
+
+app.post("/get_leaderboard", function(req, res){
+	if(games[req.body.rN] !== undefined){
+		let playersCopy = games[req.body.rN].players.slice();
+		playersCopy.sort(function(a,b){return a.score - b.score});
+		res.send(playersCopy.map(function(a){return {"nam": a.nam, "score": a.score};}));
 	} else {
 		res.send("");
 	}
