@@ -168,6 +168,56 @@ class Game {
 
 		this.players.splice(idx, 1);
 		delete this.field[pNam];
+
+		// If the card czar leaves it will naturally go to the next person
+		// Special handling if the card czar leaves and is the last person
+		if(this.cardCzarIdx == this.players.length){
+			this.cardCzarIdx = 0;
+		}
+		if(idx < this.cardCzarIdx){
+			this.cardCzarIdx--;
+		}
+	}
+
+	selectCard(pNam, card){
+		// Remove old card from field
+		if(this.field[pNam] !== undefined){
+			this.wdeck.push(this.field[pNam]);
+			delete this.field[pNam];
+		}
+		// Remove card from hand
+		for(let i=0; i<this.players.length; i++){
+			if(this.players[i].nam === pNam){
+				if(this.players[i].hand.indexOf(card) !== -1){
+					this.players[i].hand.splice(this.players[i].hand.indexOf(card), 1);
+				}
+				break;
+			}
+		}
+		// Add to field
+		this.field[pNam] = card;
+	}
+
+	cardCzarSelect(card){
+		for(let n in this.field){
+			if(this.field[n] === card){
+				this.incrementScore(n);
+			}
+			// Remove from the field as well
+			this.wdeck.push(this.field[n]);
+			delete this.field[n];
+		}
+		this.deal();
+		this.cardCzarIdx = (this.cardCzarIdx + 1) % this.players.length
+	}
+
+	incrementScore(pNam){
+		for(let i=0; i<this.players.length; i++){
+			if(this.players[i].nam === pNam){
+				this.players[i].score++;
+				break;
+			}
+		}
 	}
 
 	isFull(){
@@ -270,8 +320,13 @@ app.post("/get_player_hand", function(req, res){
 });
 
 app.post("/get_field", function(req, res){
+	// Return the field as an array without the names
 	if(games[req.body.rN] !== undefined){
-		res.send(games[req.body.rN].field);
+		let ret = [];
+		for(let n in games[req.body.rN].field){
+			ret.push(games[req.body.rN].field[n]);
+		}
+		res.send(ret);
 	} else {
 		res.send("");
 	}
@@ -288,10 +343,28 @@ app.post("/get_card_czar", function(req, res){
 app.post("/get_leaderboard", function(req, res){
 	if(games[req.body.rN] !== undefined){
 		let playersCopy = games[req.body.rN].players.slice();
-		playersCopy.sort(function(a,b){return a.score - b.score});
+		playersCopy.sort(function(a,b){return b.score - a.score}); // Sort in reverse
 		res.send(playersCopy.map(function(a){return {"nam": a.nam, "score": a.score};}));
 	} else {
 		res.send("");
+	}
+});
+
+app.post("/select_card", function(req, res){
+	if(games[req.body.rN] !== undefined){
+		games[req.body.rN].selectCard(req.body.pN, req.body.cd);
+		res.send("Done");
+	} else {
+		res.send("Fail");
+	}
+});
+
+app.post("/card_czar_select", function(req, res){
+	if(games[req.body.rN] !== undefined){
+		games[req.body.rN].cardCzarSelect(req.body.cd);
+		res.send("Done");
+	} else {
+		res.send("Fail");
 	}
 });
 

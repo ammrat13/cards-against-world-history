@@ -37,6 +37,11 @@ $(document).ready(function(){
 				from: "top",
 				align: "center"
 			},
+			delay: 3000,
+			animate: {
+				enter: "animated fadeInDown",
+				exit: "animated fadeOutUp"
+			},
 			newest_on_top: true
 		});
 	}
@@ -102,6 +107,11 @@ $(document).ready(function(){
 						placement: {
 							from: "top",
 							align: "center"
+						},
+						delay: 3000,
+						animate: {
+							enter: "animated fadeInDown",
+							exit: "animated fadeOutUp"
 						},
 						newest_on_top: true
 					});
