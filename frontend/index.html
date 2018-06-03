@@ -22,6 +22,7 @@
 
 		<!-- External CSS and JS -->
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/index.js"></script>
 	</head>
 	<body>
 		<div class="text-center section">
@@ -30,10 +31,13 @@
 		<div class="text-center text-white bg-black section">
 			<h2><b>Join Game:</b></h2>
 			<div class="container">
-				<form>
+				<form id="join-form">
 					<div class="form-group">
 						<label for="room-name">Room Name:</label>
 						<input id="room-name" type="text" class="form-control"></input>
+						<small id="room-nameHelpBlock" class="form-text text-danger initially-hidden">
+							This room is full.
+						</small>
 					</div>
 					<div class="form-group">
 						<label for="player-name">Your Name:</label>
@@ -49,7 +53,7 @@
 		<div class="text-center text-white bg-black section">
 			<h3>Players:</h3>
 			<div id="player-listing" class="container scrollbox">
-				Loading...
+				There are no players.
 			</div>
 		</div>
 		<div class="container section">
