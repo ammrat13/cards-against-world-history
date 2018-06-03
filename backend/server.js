@@ -373,4 +373,4 @@ app.post("/card_czar_select", function(req, res){
 
 // Wait until ready
 while(bcards === [] || wcards === []){}
-app.listen(PORT, function{});
+app.listen(PORT, function(){});
