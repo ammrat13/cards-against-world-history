@@ -16,12 +16,20 @@ const fs = require('fs');
 // For shuffling arrays
 const shuffle = require('shuffle-array');
 
+// So we can check if we are rool
+const isRoot = require('is-root');
+
 
 // Configuration ---------------------------------------------------------------
 
 // What port to listen on
 // If PORT <= 1024, then sudo is required
 const PORT = 80;
+// Check if root if needed
+if(PORT <= 1024 && !isRoot()){
+	console.log("You must be root to run this server on port " + PORT);
+	process.exit(1);
+}
 
 // How quickly to timeout a user (ms)
 const T_OUT = 30*1000;
@@ -37,7 +45,7 @@ let bcards = [];
 fs.readFile("./bdeck.txt", "utf8", function(err, data){
 	// If we failed, quit
 	if(err){
-		console.log(err);
+		console.log("Failed to read ./bdeck.txt");
 		process.exit(1)
 	}
 	bcards = data.split(/\n/);
@@ -48,7 +56,7 @@ let wcards = [];
 fs.readFile("./wdeck.txt", "utf8", function(err, data){
 	// If we failed, quit
 	if(err){
-		console.log(err);
+		console.log("Failed to read ./wdeck.txt");
 		process.exit(1)
 	}
 	wcards = data.split(/\n/);
@@ -373,4 +381,6 @@ app.post("/card_czar_select", function(req, res){
 
 // Wait until ready
 while(bcards === [] || wcards === []){}
-app.listen(PORT, function(){});
+app.listen(PORT, function(){
+	console.log("Listening on port " + PORT);
+});

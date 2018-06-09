@@ -46,6 +46,8 @@ $(document).ready(function(){
 		});
 	}
 
+	// Update immediately and every 3 seconds after
+	updatePlayerList($("#room-name").val());
 	setInterval(function(){
 		updatePlayerList($("#room-name").val());
 	}, 3000)

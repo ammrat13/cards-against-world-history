@@ -19,6 +19,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "is-root": "^2.0.0",
     "nodemon": "^1.17.5",
     "shuffle-array": "^1.0.1"
   }
