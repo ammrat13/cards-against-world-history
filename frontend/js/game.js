@@ -190,9 +190,9 @@ $(document).ready(function(){
 		if(!selectedCard){
 			selectedCard = true;
 
-			$(".card-body").removeClass("bg-success");
-			$(".card-body").removeClass("text-white");
-
+			$(".card-body").addClass("text-muted");
+			
+			$(this).removeClass("text-muted");
 			$(this).addClass("bg-success");
 			$(this).addClass("text-white");
 
