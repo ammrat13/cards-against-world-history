@@ -97,7 +97,11 @@ class Game {
 	}
 
 	getBCard(){
-		return bcards[Math.floor(Math.random() * bcards.length)];
+		let tempCard = bcards[Math.floor(Math.random() * bcards.length)];
+		while(tempCard === this.bcard){
+			tempCard = bcards[Math.floor(Math.random() * bcards.length)];
+		}
+		return tempCard;
 	}
 
 	getPlayerHand(pNam){
@@ -145,7 +149,7 @@ class Game {
 
 	join(player){
 		// Check that they will have enough cards and the name isn't taken
-		if(!this.isFull() && !this.isNameTaken(player.name)){
+		if(!this.isFull() && !this.isNameTaken(player.nam)){
 			this.players.push(player);
 			if(this.cardCzarIdx === -1){
 				this.cardCzarIdx = 0;
@@ -216,6 +220,7 @@ class Game {
 			delete this.field[n];
 		}
 		this.deal();
+		this.bcard = this.getBCard();
 		this.cardCzarIdx = (this.cardCzarIdx + 1) % this.players.length
 	}
 
@@ -233,7 +238,7 @@ class Game {
 	}
 
 	isNameTaken(pNam){
-		return this.players.filter((p) => p.nam == pNam).length !== 0
+		return this.players.filter((p) => p.nam === pNam).length !== 0;
 	}
 }
 
