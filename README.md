@@ -1,4 +1,4 @@
-# cards-against-world-history
+# Cards Against World History (DEPRECATED)
 A web-based interface for *Cards Against World History*. One instance was hosted at [cardsagainstworldhistory.com](http://www.cardsagainstworldhistory.com).
 
 # Usage
